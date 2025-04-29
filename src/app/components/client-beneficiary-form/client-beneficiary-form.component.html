@@ -1,0 +1,190 @@
+<div>
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Manage Entities</h1>
+    <p class="text-gray-600">Create and manage clients and beneficiaries</p>
+  </div>
+  
+  <div class="bg-white rounded-lg shadow-sm p-6">
+    <h2 class="text-xl font-semibold mb-6 text-gray-800">Create Client/Beneficiary</h2>
+    
+    <form [formGroup]="clientBeneficiaryForm" (ngSubmit)="onSubmit()">
+      <!-- Name Field -->
+      <div class="mb-5">
+        <label for="name" class="form-label">Name</label>
+        <input 
+          type="text" 
+          id="name" 
+          formControlName="Name" 
+          class="form-input" 
+          placeholder="Enter name"
+          [ngClass]="{'border-red-500': submitted && f['Name'].errors}"
+        >
+        <div *ngIf="submitted && f['Name'].errors" class="form-error">
+          <div *ngIf="f['Name'].errors['required']">Name is required</div>
+        </div>
+      </div>
+
+      <!-- Address Field -->
+      <div class="mb-5">
+        <label for="address" class="form-label">Address</label>
+        <textarea 
+          id="address" 
+          formControlName="Address" 
+          class="form-input" 
+          rows="3"
+          placeholder="Enter address"
+          [ngClass]="{'border-red-500': submitted && f['Address'].errors}"
+        ></textarea>
+        <div *ngIf="submitted && f['Address'].errors" class="form-error">
+          <div *ngIf="f['Address'].errors['required']">Address is required</div>
+        </div>
+      </div>
+
+      <!-- Two columns layout for smaller fields -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+        <!-- Sector Field -->
+        <div>
+          <label for="sector" class="form-label">Sector</label>
+          <input 
+            type="text" 
+            id="sector" 
+            formControlName="Sector" 
+            class="form-input"
+            placeholder="Enter sector"
+          >
+        </div>
+
+        <!-- Source of Fund Field -->
+        <div>
+          <label for="sourceOfFund" class="form-label">Source of Fund</label>
+          <input 
+            type="text" 
+            id="sourceOfFund" 
+            formControlName="SourceOfFund" 
+            class="form-input"
+            placeholder="Enter source of fund"
+          >
+        </div>
+      </div>
+
+      <!-- Type of Goods Field -->
+      <div class="mb-5">
+        <label for="typeOfGoods" class="form-label">Type of Goods</label>
+        <input 
+          type="text" 
+          id="typeOfGoods" 
+          formControlName="TypeOfGoods" 
+          class="form-input"
+          placeholder="Enter type of goods"
+        >
+      </div>
+
+      <!-- Banking Information Section -->
+      <div class="mt-8 mb-5">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700">Banking Information</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- Account Number Field -->
+          <div>
+            <label for="accountNo" class="form-label">Account Number</label>
+            <input 
+              type="text" 
+              id="accountNo" 
+              formControlName="AccountNo" 
+              class="form-input"
+              placeholder="Enter account number"
+            >
+          </div>
+
+          <!-- Bank Name Field -->
+          <div>
+            <label for="bankName" class="form-label">Bank Name</label>
+            <input 
+              type="text" 
+              id="bankName" 
+              formControlName="BankName" 
+              class="form-input"
+              placeholder="Enter bank name"
+            >
+          </div>
+
+          <!-- Bank Branch Field -->
+          <div>
+            <label for="bankBranch" class="form-label">Bank Branch</label>
+            <input 
+              type="text" 
+              id="bankBranch" 
+              formControlName="BankBranch" 
+              class="form-input"
+              placeholder="Enter bank branch"
+            >
+          </div>
+
+          <!-- Bank Swift Code Field -->
+          <div>
+            <label for="bankSwiftCode" class="form-label">Bank SWIFT Code</label>
+            <input 
+              type="text" 
+              id="bankSwiftCode" 
+              formControlName="BankSwiftCode" 
+              class="form-input"
+              placeholder="Enter SWIFT code"
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Entity Type Section -->
+      <div class="mt-6 mb-8">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700">Entity Type</h3>
+        <div class="flex space-x-8">
+          <div class="flex items-center">
+            <input 
+              type="checkbox" 
+              id="isCustomer" 
+              formControlName="IsCustomer" 
+              class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+            >
+            <label for="isCustomer" class="ml-2 text-gray-700">This is a Client</label>
+          </div>
+          
+          <div class="flex items-center">
+            <input 
+              type="checkbox" 
+              id="isBeneficiary" 
+              formControlName="IsBeneficiary" 
+              class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+            >
+            <label for="isBeneficiary" class="ml-2 text-gray-700">This is a Beneficiary</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Submission -->
+      <div>
+        <button 
+          type="submit" 
+          class="btn-primary bg-indigo-600 hover:bg-indigo-700" 
+          [disabled]="loading"
+        >
+          <span *ngIf="loading" class="mr-2">
+            <svg class="animate-spin h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          </span>
+          {{ loading ? 'Creating...' : 'Create' }}
+        </button>
+      </div>
+
+      <!-- Success and Error Messages -->
+      <div *ngIf="successMessage" class="success-message mt-4">
+        {{ successMessage }}
+      </div>
+      
+      <div *ngIf="errorMessage" class="error-message mt-4">
+        {{ errorMessage }}
+      </div>
+    </form>
+  </div>
+</div> 

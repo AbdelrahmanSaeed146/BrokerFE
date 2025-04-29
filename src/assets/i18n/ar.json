@@ -1,0 +1,102 @@
+{
+    "APP": {
+        "TITLE": "معالج PDF",
+        "FOOTER": "معالج PDF © {{year}} | جميع الحقوق محفوظة"
+    },
+    "NAV": {
+        "MANAGE_ENTITIES": "إدارة الكيانات",
+        "GENERATE_PDF": "إنشاء PDF",
+        "ADMIN": "المدير"
+    },
+    "ENTITIES": {
+        "TITLE": "إدارة الكيانات",
+        "SUBTITLE": "إنشاء وإدارة العملاء والمستفيدين",
+        "FORM_TITLE": "إنشاء عميل/مستفيد",
+        "FIELDS": {
+            "NAME": "الاسم",
+            "NAME_REQUIRED": "الاسم مطلوب",
+            "ADDRESS": "العنوان",
+            "ADDRESS_REQUIRED": "العنوان مطلوب",
+            "SECTOR": "القطاع",
+            "SOURCE_OF_FUND": "مصدر التمويل",
+            "TYPE_OF_GOODS": "نوع البضائع",
+            "BANKING_INFO": "المعلومات المصرفية",
+            "ACCOUNT_NUMBER": "رقم الحساب",
+            "BANK_NAME": "اسم البنك",
+            "BANK_BRANCH": "فرع البنك",
+            "BANK_SWIFT": "رمز سويفت البنكي",
+            "ENTITY_TYPE": "نوع الكيان",
+            "IS_CLIENT": "هذا عميل",
+            "IS_BENEFICIARY": "هذا مستفيد"
+        },
+        "PLACEHOLDERS": {
+            "NAME": "أدخل الاسم",
+            "ADDRESS": "أدخل العنوان",
+            "SECTOR": "أدخل القطاع",
+            "SOURCE_OF_FUND": "أدخل مصدر التمويل",
+            "TYPE_OF_GOODS": "أدخل نوع البضائع",
+            "ACCOUNT_NUMBER": "أدخل رقم الحساب",
+            "BANK_NAME": "أدخل اسم البنك",
+            "BANK_BRANCH": "أدخل فرع البنك",
+            "BANK_SWIFT": "أدخل رمز سويفت"
+        },
+        "BUTTONS": {
+            "CREATE": "إنشاء",
+            "CREATING": "جاري الإنشاء..."
+        }
+    },
+    "PDF": {
+        "TITLE": "مولد PDF",
+        "SUBTITLE": "إنشاء مستندات PDF مخصصة لعملائك",
+        "FORM_TITLE": "تفاصيل المستند",
+        "FIELDS": {
+            "CLIENT": "اختر العميل",
+            "CLIENT_REQUIRED": "العميل مطلوب",
+            "BENEFICIARY": "اختر المستفيد",
+            "BENEFICIARY_REQUIRED": "المستفيد مطلوب",
+            "TEMPLATE": "اختر القالب",
+            "TEMPLATE_REQUIRED": "القالب مطلوب",
+            "AMOUNT": "المبلغ",
+            "AMOUNT_REQUIRED": "المبلغ مطلوب",
+            "AMOUNT_MIN": "يجب أن يكون المبلغ غير سالب",
+            "CURRENCY": "العملة",
+            "CURRENCY_REQUIRED": "العملة مطلوبة",
+            "PURPOSE": "الغرض من التحويل",
+            "SOURCE_OF_FUND": "مصدر التمويل",
+            "TYPE_OF_GOODS": "نوع البضائع"
+        },
+        "PLACEHOLDERS": {
+            "CLIENT": "اختر عميلاً",
+            "BENEFICIARY": "اختر مستفيداً",
+            "TEMPLATE": "اختر قالباً",
+            "AMOUNT": "أدخل المبلغ",
+            "CURRENCY": "مثل: دولار، يورو",
+            "PURPOSE": "أدخل الغرض من التحويل",
+            "SOURCE_OF_FUND": "أدخل مصدر التمويل",
+            "TYPE_OF_GOODS": "أدخل نوع البضائع"
+        },
+        "PREVIEW": "اختر العميل والمستفيد والقالب للمعاينة",
+        "RECENT": "المعاملات الأخيرة",
+        "TRANSACTION_TABLE": {
+            "TIME": "الوقت",
+            "CLIENT": "العميل",
+            "BENEFICIARY": "المستفيد",
+            "TEMPLATE": "القالب",
+            "STATUS": "الحالة",
+            "SUCCESS": "ناجح"
+        },
+        "BUTTONS": {
+            "GENERATE": "إنشاء PDF",
+            "PROCESSING": "جاري المعالجة..."
+        }
+    },
+    "MESSAGES": {
+        "SUCCESS": {
+            "ENTITY_CREATED": "تم إنشاء العميل/المستفيد بنجاح!",
+            "PDF_GENERATED": "تم إنشاء المعاملة بنجاح! تم إنشاء ملف PDF."
+        },
+        "ERROR": {
+            "DEFAULT": "حدث خطأ. يرجى المحاولة مرة أخرى."
+        }
+    }
+}

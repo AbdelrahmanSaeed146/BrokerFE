@@ -1,0 +1,102 @@
+{
+    "APP": {
+        "TITLE": "PDF Wizard",
+        "FOOTER": "PDF Wizard © {{year}} | All Rights Reserved"
+    },
+    "NAV": {
+        "MANAGE_ENTITIES": "Manage Entities",
+        "GENERATE_PDF": "Generate PDF",
+        "ADMIN": "Admin"
+    },
+    "ENTITIES": {
+        "TITLE": "Manage Entities",
+        "SUBTITLE": "Create and manage clients and beneficiaries",
+        "FORM_TITLE": "Create Client/Beneficiary",
+        "FIELDS": {
+            "NAME": "Name",
+            "NAME_REQUIRED": "Name is required",
+            "ADDRESS": "Address",
+            "ADDRESS_REQUIRED": "Address is required",
+            "SECTOR": "Sector",
+            "SOURCE_OF_FUND": "Source of Fund",
+            "TYPE_OF_GOODS": "Type of Goods",
+            "BANKING_INFO": "Banking Information",
+            "ACCOUNT_NUMBER": "Account Number",
+            "BANK_NAME": "Bank Name",
+            "BANK_BRANCH": "Bank Branch",
+            "BANK_SWIFT": "Bank SWIFT Code",
+            "ENTITY_TYPE": "Entity Type",
+            "IS_CLIENT": "This is a Client",
+            "IS_BENEFICIARY": "This is a Beneficiary"
+        },
+        "PLACEHOLDERS": {
+            "NAME": "Enter name",
+            "ADDRESS": "Enter address",
+            "SECTOR": "Enter sector",
+            "SOURCE_OF_FUND": "Enter source of fund",
+            "TYPE_OF_GOODS": "Enter type of goods",
+            "ACCOUNT_NUMBER": "Enter account number",
+            "BANK_NAME": "Enter bank name",
+            "BANK_BRANCH": "Enter bank branch",
+            "BANK_SWIFT": "Enter SWIFT code"
+        },
+        "BUTTONS": {
+            "CREATE": "Create",
+            "CREATING": "Creating..."
+        }
+    },
+    "PDF": {
+        "TITLE": "PDF Generator",
+        "SUBTITLE": "Generate custom PDF documents for your clients",
+        "FORM_TITLE": "Document Details",
+        "FIELDS": {
+            "CLIENT": "Select Client",
+            "CLIENT_REQUIRED": "Client is required",
+            "BENEFICIARY": "Select Beneficiary",
+            "BENEFICIARY_REQUIRED": "Beneficiary is required",
+            "TEMPLATE": "Select Template",
+            "TEMPLATE_REQUIRED": "Template is required",
+            "AMOUNT": "Amount",
+            "AMOUNT_REQUIRED": "Amount is required",
+            "AMOUNT_MIN": "Amount must be non-negative",
+            "CURRENCY": "Currency",
+            "CURRENCY_REQUIRED": "Currency is required",
+            "PURPOSE": "Purpose of Transfer",
+            "SOURCE_OF_FUND": "Source of Fund",
+            "TYPE_OF_GOODS": "Type of Goods"
+        },
+        "PLACEHOLDERS": {
+            "CLIENT": "Select a client",
+            "BENEFICIARY": "Select a beneficiary",
+            "TEMPLATE": "Select a template",
+            "AMOUNT": "Enter amount",
+            "CURRENCY": "E.g. USD, EUR",
+            "PURPOSE": "Enter purpose of transfer",
+            "SOURCE_OF_FUND": "Enter source of fund",
+            "TYPE_OF_GOODS": "Enter type of goods"
+        },
+        "PREVIEW": "Select client, beneficiary, and template to preview",
+        "RECENT": "Recent Transactions",
+        "TRANSACTION_TABLE": {
+            "TIME": "Time",
+            "CLIENT": "Client",
+            "BENEFICIARY": "Beneficiary",
+            "TEMPLATE": "Template",
+            "STATUS": "Status",
+            "SUCCESS": "Success"
+        },
+        "BUTTONS": {
+            "GENERATE": "Generate PDF",
+            "PROCESSING": "Processing..."
+        }
+    },
+    "MESSAGES": {
+        "SUCCESS": {
+            "ENTITY_CREATED": "Client/Beneficiary created successfully!",
+            "PDF_GENERATED": "Transaction created successfully! PDF has been generated."
+        },
+        "ERROR": {
+            "DEFAULT": "An error occurred. Please try again."
+        }
+    }
+}
