@@ -4,12 +4,12 @@
         "FOOTER": "معالج PDF © {{year}} | جميع الحقوق محفوظة"
     },
     "NAV": {
-        "MANAGE_ENTITIES": "إدارة الكيانات",
+        "MANAGE_ENTITIES": "إدارة العملاء",
         "GENERATE_PDF": "إنشاء PDF",
         "ADMIN": "المدير"
     },
     "ENTITIES": {
-        "TITLE": "إدارة الكيانات",
+        "TITLE": "إدارة العملاء",
         "SUBTITLE": "إنشاء وإدارة العملاء والمستفيدين",
         "FORM_TITLE": "إنشاء عميل/مستفيد",
         "FIELDS": {
@@ -46,7 +46,7 @@
         }
     },
     "PDF": {
-        "TITLE": "مولد PDF",
+        "TITLE": "إنشاء PDF",
         "SUBTITLE": "إنشاء مستندات PDF مخصصة لعملائك",
         "FORM_TITLE": "تفاصيل المستند",
         "FIELDS": {
@@ -98,5 +98,9 @@
         "ERROR": {
             "DEFAULT": "حدث خطأ. يرجى المحاولة مرة أخرى."
         }
+    },
+    "LANGUAGE": {
+        "ARABIC": "العربية",
+        "ENGLISH": "الإنجليزية"
     }
 }

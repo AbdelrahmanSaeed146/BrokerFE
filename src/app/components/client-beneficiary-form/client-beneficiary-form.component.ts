@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
+import { TranslocoPipe } from '@ngneat/transloco';
 
 @Component({
     selector: 'app-client-beneficiary-form',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [CommonModule, ReactiveFormsModule, TranslocoPipe],
     templateUrl: './client-beneficiary-form.component.html',
     styleUrls: ['./client-beneficiary-form.component.scss']
 })

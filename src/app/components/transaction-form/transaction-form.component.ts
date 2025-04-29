@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
+import { TranslocoPipe } from '@ngneat/transloco';
 
 @Component({
     selector: 'app-transaction-form',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [CommonModule, ReactiveFormsModule, TranslocoPipe],
     templateUrl: './transaction-form.component.html',
     styleUrls: ['./transaction-form.component.scss']
 })

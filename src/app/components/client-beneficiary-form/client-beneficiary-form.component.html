@@ -1,134 +1,128 @@
 <div>
   <div class="mb-6">
-    <h1 class="text-2xl font-bold text-gray-800">Manage Entities</h1>
-    <p class="text-gray-600">Create and manage clients and beneficiaries</p>
+    <h1 class="text-2xl font-bold text-gray-800">{{ 'ENTITIES.TITLE' | transloco }}</h1>
+    <p class="text-gray-600">{{ 'ENTITIES.SUBTITLE' | transloco }}</p>
   </div>
   
   <div class="bg-white rounded-lg shadow-sm p-6">
-    <h2 class="text-xl font-semibold mb-6 text-gray-800">Create Client/Beneficiary</h2>
+    <h2 class="text-xl font-semibold mb-6 text-gray-800">{{ 'ENTITIES.FORM_TITLE' | transloco }}</h2>
     
     <form [formGroup]="clientBeneficiaryForm" (ngSubmit)="onSubmit()">
       <!-- Name Field -->
-      <div class="mb-5">
-        <label for="name" class="form-label">Name</label>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+      <div>
+        <label for="name" class="form-label">{{ 'ENTITIES.FIELDS.NAME' | transloco }}</label>
         <input 
           type="text" 
           id="name" 
           formControlName="Name" 
           class="form-input" 
-          placeholder="Enter name"
+          [placeholder]= "'ENTITIES.PLACEHOLDERS.NAME' | transloco"
           [ngClass]="{'border-red-500': submitted && f['Name'].errors}"
         >
         <div *ngIf="submitted && f['Name'].errors" class="form-error">
-          <div *ngIf="f['Name'].errors['required']">Name is required</div>
+          <div *ngIf="f['Name'].errors['required']">{{ 'ENTITIES.FIELDS.NAME_REQUIRED' | transloco }}</div>
         </div>
       </div>
-
+      
       <!-- Address Field -->
-      <div class="mb-5">
-        <label for="address" class="form-label">Address</label>
-        <textarea 
+      <div>
+        <label for="address" class="form-label">{{ 'ENTITIES.FIELDS.ADDRESS' | transloco }}</label>
+        <input 
           id="address" 
           formControlName="Address" 
           class="form-input" 
-          rows="3"
-          placeholder="Enter address"
+          [placeholder]= "'ENTITIES.PLACEHOLDERS.ADDRESS' | transloco"
           [ngClass]="{'border-red-500': submitted && f['Address'].errors}"
-        ></textarea>
+        >
         <div *ngIf="submitted && f['Address'].errors" class="form-error">
-          <div *ngIf="f['Address'].errors['required']">Address is required</div>
+          <div *ngIf="f['Address'].errors['required']">{{ 'ENTITIES.FIELDS.ADDRESS_REQUIRED' | transloco }}</div>
         </div>
       </div>
-
+    </div>
       <!-- Two columns layout for smaller fields -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
         <!-- Sector Field -->
         <div>
-          <label for="sector" class="form-label">Sector</label>
+          <label for="sector" class="form-label">{{ 'ENTITIES.FIELDS.SECTOR' | transloco }}</label>
           <input 
             type="text" 
             id="sector" 
             formControlName="Sector" 
             class="form-input"
-            placeholder="Enter sector"
-          >
+            [placeholder]= "'ENTITIES.PLACEHOLDERS.SECTOR' | transloco"          >
         </div>
 
         <!-- Source of Fund Field -->
         <div>
-          <label for="sourceOfFund" class="form-label">Source of Fund</label>
+          <label for="sourceOfFund" class="form-label">{{ 'ENTITIES.FIELDS.SOURCE_OF_FUND' | transloco }}</label>
           <input 
             type="text" 
             id="sourceOfFund" 
             formControlName="SourceOfFund" 
             class="form-input"
-            placeholder="Enter source of fund"
-          >
+            [placeholder]= "'ENTITIES.PLACEHOLDERS.SOURCE_OF_FUND' | transloco"          >
         </div>
       </div>
 
       <!-- Type of Goods Field -->
       <div class="mb-5">
-        <label for="typeOfGoods" class="form-label">Type of Goods</label>
+        <label for="typeOfGoods" class="form-label">{{ 'ENTITIES.FIELDS.TYPE_OF_GOODS' | transloco }}</label>
         <input 
           type="text" 
           id="typeOfGoods" 
           formControlName="TypeOfGoods" 
           class="form-input"
-          placeholder="Enter type of goods"
-        >
+          [placeholder]= "'ENTITIES.PLACEHOLDERS.TYPE_OF_GOODS' | transloco"        >
       </div>
 
       <!-- Banking Information Section -->
       <div class="mt-8 mb-5">
-        <h3 class="text-lg font-semibold mb-4 text-gray-700">Banking Information</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700">{{ 'ENTITIES.FIELDS.BANKING_INFO' | transloco }}</h3>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <!-- Account Number Field -->
           <div>
-            <label for="accountNo" class="form-label">Account Number</label>
+            <label for="accountNo" class="form-label">{{ 'ENTITIES.FIELDS.ACCOUNT_NUMBER' | transloco }}</label>
             <input 
               type="text" 
               id="accountNo" 
               formControlName="AccountNo" 
               class="form-input"
-              placeholder="Enter account number"
-            >
+              [placeholder]= "'ENTITIES.PLACEHOLDERS.ACCOUNT_NUMBER' | transloco"            >
           </div>
 
           <!-- Bank Name Field -->
           <div>
-            <label for="bankName" class="form-label">Bank Name</label>
+            <label for="bankName" class="form-label">{{ 'ENTITIES.FIELDS.BANK_NAME' | transloco }}</label>
             <input 
               type="text" 
               id="bankName" 
               formControlName="BankName" 
               class="form-input"
-              placeholder="Enter bank name"
-            >
+              [placeholder]= "'ENTITIES.PLACEHOLDERS.BANK_NAME' | transloco"            >
           </div>
 
           <!-- Bank Branch Field -->
           <div>
-            <label for="bankBranch" class="form-label">Bank Branch</label>
+            <label for="bankBranch" class="form-label">{{ 'ENTITIES.FIELDS.BANK_BRANCH' | transloco }}</label>
             <input 
               type="text" 
               id="bankBranch" 
               formControlName="BankBranch" 
               class="form-input"
-              placeholder="Enter bank branch"
-            >
+              [placeholder]= "'ENTITIES.PLACEHOLDERS.BANK_BRANCH' | transloco"            >
           </div>
 
           <!-- Bank Swift Code Field -->
           <div>
-            <label for="bankSwiftCode" class="form-label">Bank SWIFT Code</label>
+            <label for="bankSwiftCode" class="form-label">{{ 'ENTITIES.FIELDS.BANK_SWIFT' | transloco }}</label>
             <input 
               type="text" 
               id="bankSwiftCode" 
               formControlName="BankSwiftCode" 
               class="form-input"
-              placeholder="Enter SWIFT code"
+              [placeholder]= "'ENTITIES.PLACEHOLDERS.BANK_SWIFT' | transloco"
             >
           </div>
         </div>
@@ -136,16 +130,16 @@
 
       <!-- Entity Type Section -->
       <div class="mt-6 mb-8">
-        <h3 class="text-lg font-semibold mb-4 text-gray-700">Entity Type</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700">{{ 'ENTITIES.FIELDS.ENTITY_TYPE' | transloco }}</h3>
         <div class="flex space-x-8">
           <div class="flex items-center">
             <input 
               type="checkbox" 
               id="isCustomer" 
               formControlName="IsCustomer" 
-              class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+              class="h-4 w-4 me-1 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
             >
-            <label for="isCustomer" class="ml-2 text-gray-700">This is a Client</label>
+            <label for="isCustomer" class="ml-2 text-gray-700">{{ 'ENTITIES.FIELDS.IS_CLIENT' | transloco }}</label>
           </div>
           
           <div class="flex items-center">
@@ -153,9 +147,9 @@
               type="checkbox" 
               id="isBeneficiary" 
               formControlName="IsBeneficiary" 
-              class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+              class="h-4 w-4 me-1 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
             >
-            <label for="isBeneficiary" class="ml-2 text-gray-700">This is a Beneficiary</label>
+            <label for="isBeneficiary" class="ml-2 text-gray-700">{{ 'ENTITIES.FIELDS.IS_BENEFICIARY' | transloco }}</label>
           </div>
         </div>
       </div>
@@ -173,17 +167,17 @@
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
           </span>
-          {{ loading ? 'Creating...' : 'Create' }}
+          {{ loading ? 'ENTITIES.BUTTONS.CREATING' : 'ENTITIES.BUTTONS.CREATE' | transloco}}
         </button>
       </div>
 
       <!-- Success and Error Messages -->
       <div *ngIf="successMessage" class="success-message mt-4">
-        {{ successMessage }}
+        {{ 'MESSAGES.SUCCESS.ENTITY_CREATED' | transloco  }}
       </div>
       
       <div *ngIf="errorMessage" class="error-message mt-4">
-        {{ errorMessage }}
+        {{ 'MESSAGES.ERROR.DEFAULT' | transloco  }}
       </div>
     </form>
   </div>
