@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
+import { TranslocoPipe } from '@ngneat/transloco';
 
 @Component({
     selector: 'app-client-beneficiary-form',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [CommonModule, ReactiveFormsModule, TranslocoPipe],
     templateUrl: './client-beneficiary-form.component.html',
     styleUrls: ['./client-beneficiary-form.component.scss']
 })
 export class ClientBeneficiaryFormComponent implements OnInit {
+    private destroyRef = inject(DestroyRef);
     clientBeneficiaryForm!: FormGroup;
     submitted = false;
     errorMessage = '';
@@ -30,14 +32,14 @@ export class ClientBeneficiaryFormComponent implements OnInit {
         this.clientBeneficiaryForm = this.formBuilder.group({
             Name: ['', Validators.required],
             Address: ['', Validators.required],
-            Sector: [''],
-            SourceOfFund: [''],
-            TypeOfGoods: [''],
-            AccountNo: [''],
-            BankName: [''],
-            BankBranch: [''],
-            BankSwiftCode: [''],
-            IsCustomer: [false],
+            Sector: ['', Validators.required],
+            SourceOfFund: ['', Validators.required],
+            TypeOfGoods: ['', Validators.required],
+            AccountNo: ['', Validators.required],
+            BankName: ['', Validators.required],
+            BankBranch: ['', Validators.required],
+            BankSwiftCode: ['', Validators.required],
+            IsCustomer: [true],
             IsBeneficiary: [false]
         });
     }
@@ -77,4 +79,8 @@ export class ClientBeneficiaryFormComponent implements OnInit {
             }
         });
     }
+
+    nDestroy = this.destroyRef.onDestroy( () => {
+        this.clientBeneficiaryForm.reset();
+    })
 } 

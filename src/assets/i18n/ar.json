@@ -4,12 +4,12 @@
         "FOOTER": "معالج PDF © {{year}} | جميع الحقوق محفوظة"
     },
     "NAV": {
-        "MANAGE_ENTITIES": "إدارة الكيانات",
+        "MANAGE_ENTITIES": "إدارة العملاء",
         "GENERATE_PDF": "إنشاء PDF",
         "ADMIN": "المدير"
     },
     "ENTITIES": {
-        "TITLE": "إدارة الكيانات",
+        "TITLE": "إدارة العملاء",
         "SUBTITLE": "إنشاء وإدارة العملاء والمستفيدين",
         "FORM_TITLE": "إنشاء عميل/مستفيد",
         "FIELDS": {
@@ -18,13 +18,20 @@
             "ADDRESS": "العنوان",
             "ADDRESS_REQUIRED": "العنوان مطلوب",
             "SECTOR": "القطاع",
+            "SECTOR_REQUIRED": "القطاع مطلوب",
             "SOURCE_OF_FUND": "مصدر التمويل",
+            "SOURCE_OF_FUND_REQUIRED": "مصدر التمويل مطلوب",
             "TYPE_OF_GOODS": "نوع البضائع",
+            "TYPE_OF_GOODS_REQUIRED": "نوع البضائع مطلوب",
             "BANKING_INFO": "المعلومات المصرفية",
             "ACCOUNT_NUMBER": "رقم الحساب",
+            "ACCOUNT_NUMBER_REQUIRED": "رقم الحساب مطلوب",
             "BANK_NAME": "اسم البنك",
+            "BANK_NAME_REQUIRED": "اسم البنك مطلوب",
             "BANK_BRANCH": "فرع البنك",
+            "BANK_BRANCH_REQUIRED": "فرع البنك مطلوب",
             "BANK_SWIFT": "رمز سويفت البنكي",
+            "BANK_SWIFT_REQUIRED": "رمز سويفت البنكي مطلوب",
             "ENTITY_TYPE": "نوع الكيان",
             "IS_CLIENT": "هذا عميل",
             "IS_BENEFICIARY": "هذا مستفيد"
@@ -46,7 +53,7 @@
         }
     },
     "PDF": {
-        "TITLE": "مولد PDF",
+        "TITLE": "إنشاء PDF",
         "SUBTITLE": "إنشاء مستندات PDF مخصصة لعملائك",
         "FORM_TITLE": "تفاصيل المستند",
         "FIELDS": {
@@ -62,8 +69,11 @@
             "CURRENCY": "العملة",
             "CURRENCY_REQUIRED": "العملة مطلوبة",
             "PURPOSE": "الغرض من التحويل",
+            "PURPOSE_REQUIRED": "الغرض من التحويل مطلوب",
             "SOURCE_OF_FUND": "مصدر التمويل",
-            "TYPE_OF_GOODS": "نوع البضائع"
+            "SOURCE_OF_FUND_REQUIRED": "مصدر التمويل مطلوب",
+            "TYPE_OF_GOODS": "نوع البضائع",
+            "TYPE_OF_GOODS_REQUIRED": "نوع البضائع مطلوب"
         },
         "PLACEHOLDERS": {
             "CLIENT": "اختر عميلاً",
@@ -98,5 +108,9 @@
         "ERROR": {
             "DEFAULT": "حدث خطأ. يرجى المحاولة مرة أخرى."
         }
+    },
+    "LANGUAGE": {
+        "ARABIC": "العربية",
+        "ENGLISH": "الإنجليزية"
     }
 }

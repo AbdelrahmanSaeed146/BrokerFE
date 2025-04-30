@@ -1,80 +1,84 @@
-<div>
+<div class="mx-5">
   <div class="mb-6">
-    <h1 class="text-2xl font-bold text-gray-800">PDF Generator</h1>
-    <p class="text-gray-600">Generate custom PDF documents for your clients</p>
+    <h1 class="text-2xl font-bold text-gray-800">{{ 'PDF.TITLE' | transloco }}</h1>
+    <p class="text-gray-600">{{ 'PDF.SUBTITLE' | transloco }}</p>
   </div>
   
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <div class="grid grid-cols-1 gap-6">
     <!-- Form Section -->
     <div class="lg:col-span-2">
-      <div class="bg-white rounded-lg shadow-sm p-6">
+      <div class="bg-white rounded-lg shadow-sm p-12">
         <h2 class="text-xl font-semibold mb-6 flex items-center text-gray-800">
-          <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg class="w-5 h-5 mr-2 me-1 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
           </svg>
-          Document Details
+          {{ 'PDF.FORM_TITLE' | transloco }}
         </h2>
         
         <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
           <div class="grid grid-cols-1 gap-5">
             <!-- Client ID Field -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div>
-              <label for="clientId" class="form-label">Select Client</label>
+              <label for="clientId" class="form-label">{{ 'PDF.FIELDS.CLIENT' | transloco }}</label>
               <select
                 id="clientId"
                 formControlName="ClientId"
                 class="form-input"
                 [ngClass]="{'border-red-500': submitted && f['ClientId'].errors}"
               >
-                <option value="">Select a client</option>
-                <option value="123e4567-e89b-12d3-a456-426614174000">Acme Corporation</option>
-                <option value="223e4567-e89b-12d3-a456-426614174001">Globex Industries</option>
+                <option value="" disabled>{{ 'PDF.PLACEHOLDERS.CLIENT' | transloco }}</option>
+                @for (client of clients(); track client.id) {
+                  <option [value]="client.id">{{ client.name }}</option>
+                }
               </select>
               <div *ngIf="submitted && f['ClientId'].errors" class="form-error">
-                <div *ngIf="f['ClientId'].errors['required']">Client is required</div>
+                <div *ngIf="f['ClientId'].errors['required']">{{ 'PDF.FIELDS.CLIENT_REQUIRED' | transloco }}</div>
               </div>
             </div>
 
             <!-- Beneficiary ID Field -->
             <div>
-              <label for="beneficiaryId" class="form-label">Select Beneficiary</label>
+              <label for="beneficiaryId" class="form-label">{{ 'PDF.FIELDS.BENEFICIARY' | transloco }}</label>
               <select
                 id="beneficiaryId"
                 formControlName="BeneficiaryId"
                 class="form-input"
                 [ngClass]="{'border-red-500': submitted && f['BeneficiaryId'].errors}"
               >
-                <option value="">Select a beneficiary</option>
-                <option value="323e4567-e89b-12d3-a456-426614174002">John Doe</option>
-                <option value="423e4567-e89b-12d3-a456-426614174003">Robert Johnson</option>
+                <option value="" disabled>{{ 'PDF.PLACEHOLDERS.BENEFICIARY' | transloco }}</option>
+                @for (beneficiary of beneficiaries(); track beneficiary.id) {
+                  <option [value]="beneficiary.id">{{ beneficiary.name }}</option>
+                }
               </select>
               <div *ngIf="submitted && f['BeneficiaryId'].errors" class="form-error">
-                <div *ngIf="f['BeneficiaryId'].errors['required']">Beneficiary is required</div>
+                <div *ngIf="f['BeneficiaryId'].errors['required']">{{ 'PDF.FIELDS.BENEFICIARY_REQUIRED' | transloco }}</div>
               </div>
             </div>
 
             <!-- Template ID Field -->
             <div>
-              <label for="templateId" class="form-label">Select Template</label>
+              <label for="templateId" class="form-label">{{ 'PDF.FIELDS.TEMPLATE' | transloco }}</label>
               <select
                 id="templateId"
                 formControlName="TemplateId"
                 class="form-input"
                 [ngClass]="{'border-red-500': submitted && f['TemplateId'].errors}"
               >
-                <option value="">Select a template</option>
-                <option value="523e4567-e89b-12d3-a456-426614174004">Invoice Template</option>
-                <option value="623e4567-e89b-12d3-a456-426614174005">Contract Template</option>
+                <option value="" disabled>{{ 'PDF.PLACEHOLDERS.TEMPLATE' | transloco }}</option>
+                @for (template of templates(); track template.id) {
+                  <option [value]="template.id">{{ template.templateName }}</option>
+                }
               </select>
               <div *ngIf="submitted && f['TemplateId'].errors" class="form-error">
-                <div *ngIf="f['TemplateId'].errors['required']">Template is required</div>
+                <div *ngIf="f['TemplateId'].errors['required']">{{ 'PDF.FIELDS.TEMPLATE_REQUIRED' | transloco }}</div>
               </div>
             </div>
-
+          </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
               <!-- Amount Field -->
               <div>
-                <label for="amount" class="form-label">Amount</label>
+                <label for="amount" class="form-label">{{ 'PDF.FIELDS.AMOUNT' | transloco }}</label>
                 <input 
                   type="number" 
                   id="amount" 
@@ -83,69 +87,80 @@
                   [ngClass]="{'border-red-500': submitted && f['Amount'].errors}"
                   min="0"
                   step="0.01"
-                  placeholder="Enter amount"
+                  [placeholder]= "'PDF.PLACEHOLDERS.AMOUNT' | transloco"
                 >
                 <div *ngIf="submitted && f['Amount'].errors" class="form-error">
-                  <div *ngIf="f['Amount'].errors['required']">Amount is required</div>
-                  <div *ngIf="f['Amount'].errors['min']">Amount must be non-negative</div>
+                  <div *ngIf="f['Amount'].errors['required']">{{ 'PDF.FIELDS.AMOUNT_REQUIRED' | transloco }}</div>
+                  <div *ngIf="f['Amount'].errors['min']">{{ 'PDF.FIELDS.AMOUNT_MIN' | transloco }}</div>
                 </div>
               </div>
 
               <!-- Currency Field -->
               <div>
-                <label for="currency" class="form-label">Currency</label>
+                <label for="currency" class="form-label">{{ 'PDF.FIELDS.CURRENCY' | transloco }}</label>
                 <input 
                   type="text" 
                   id="currency" 
                   formControlName="Currency" 
                   class="form-input" 
                   [ngClass]="{'border-red-500': submitted && f['Currency'].errors}"
-                  placeholder="E.g. USD, EUR"
+                  [placeholder]= "'PDF.PLACEHOLDERS.CURRENCY' | transloco"
                 >
                 <div *ngIf="submitted && f['Currency'].errors" class="form-error">
-                  <div *ngIf="f['Currency'].errors['required']">Currency is required</div>
+                  <div *ngIf="f['Currency'].errors['required']">{{ 'PDF.FIELDS.CURRENCY_REQUIRED' | transloco }}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <!-- Source of Fund Field -->
+              <div>
+                <label for="sourceOfFund" class="form-label">{{ 'PDF.FIELDS.SOURCE_OF_FUND' | transloco }}</label>
+                <input 
+                  type="text" 
+                  id="sourceOfFund" 
+                  formControlName="SourceOfFund" 
+                  class="form-input"
+                  [placeholder]= "'PDF.PLACEHOLDERS.SOURCE_OF_FUND' | transloco"
+                  [ngClass]="{'border-red-500': submitted && f['Currency'].errors}"
+                >
+                <div *ngIf="submitted && f['SourceOfFund'].errors" class="form-error">
+                  <div *ngIf="f['SourceOfFund'].errors['required']">{{ 'PDF.FIELDS.SOURCE_OF_FUND_REQUIRED' | transloco }}</div>
+                </div>
+              </div>
+
+              <!-- Type of Goods Field -->
+              <div>
+                <label for="typeOfGoods" class="form-label">{{ 'PDF.FIELDS.TYPE_OF_GOODS' | transloco }}</label>
+                <input 
+                  type="text" 
+                  id="typeOfGoods" 
+                  formControlName="TypeOfGoods" 
+                  class="form-input"
+                  [placeholder]= "'PDF.PLACEHOLDERS.TYPE_OF_GOODS' | transloco"
+                  [ngClass]="{'border-red-500': submitted && f['Currency'].errors}"
+                >
+                <div *ngIf="submitted && f['TypeOfGoods'].errors" class="form-error">
+                  <div *ngIf="f['TypeOfGoods'].errors['required']">{{ 'PDF.FIELDS.TYPE_OF_GOODS_REQUIRED' | transloco }}</div>
                 </div>
               </div>
             </div>
 
             <!-- Purpose of Transfer Field -->
             <div>
-              <label for="purposeOfTransfer" class="form-label">Purpose of Transfer</label>
+              <label for="purposeOfTransfer" class="form-label">{{ 'PDF.FIELDS.PURPOSE' | transloco }}</label>
               <textarea 
                 id="purposeOfTransfer" 
                 formControlName="PurposeOfTransfer" 
                 class="form-input" 
                 rows="2"
-                placeholder="Enter purpose of transfer"
+                [placeholder]= "'PDF.PLACEHOLDERS.PURPOSE' | transloco"
+                [ngClass]="{'border-red-500': submitted && f['Currency'].errors}"
               ></textarea>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <!-- Source of Fund Field -->
-              <div>
-                <label for="sourceOfFund" class="form-label">Source of Fund</label>
-                <input 
-                  type="text" 
-                  id="sourceOfFund" 
-                  formControlName="SourceOfFund" 
-                  class="form-input"
-                  placeholder="Enter source of fund"
-                >
-              </div>
-
-              <!-- Type of Goods Field -->
-              <div>
-                <label for="typeOfGoods" class="form-label">Type of Goods</label>
-                <input 
-                  type="text" 
-                  id="typeOfGoods" 
-                  formControlName="TypeOfGoods" 
-                  class="form-input"
-                  placeholder="Enter type of goods"
-                >
+              <div *ngIf="submitted && f['PurposeOfTransfer'].errors" class="form-error">
+                <div *ngIf="f['PurposeOfTransfer'].errors['required']">{{ 'PDF.FIELDS.PURPOSE_REQUIRED' | transloco }}</div>
               </div>
             </div>
-
             <!-- Form Submission -->
             <div class="mt-4">
               <button 
@@ -159,20 +174,20 @@
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
                 </span>
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-5 h-5 mr-2 me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                 </svg>
-                {{ loading ? 'Processing...' : 'Generate PDF' }}
+                {{ loading ? 'PDF.BUTTONS.PROCESSING' : 'PDF.BUTTONS.GENERATE' | transloco}}
               </button>
             </div>
 
             <!-- Success and Error Messages -->
             <div *ngIf="successMessage" class="success-message mt-4">
-              {{ successMessage }}
+              {{ 'MESSAGES.SUCCESS.PDF_GENERATED' | transloco  }}
             </div>
             
             <div *ngIf="errorMessage" class="error-message mt-4">
-              {{ errorMessage }}
+              {{ 'MESSAGES.ERROR.DEFAULT' | transloco  }}
             </div>
           </div>
         </form>
@@ -180,7 +195,7 @@
     </div>
     
     <!-- Preview Section -->
-    <div class="lg:col-span-1">
+    <!-- <div class="lg:col-span-1">
       <div class="bg-white rounded-lg shadow-sm p-6 flex flex-col items-center justify-center h-full">
         <div class="w-24 h-32 bg-gray-100 border border-gray-200 rounded-lg mb-4 flex items-center justify-center">
           <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -189,44 +204,9 @@
         </div>
         <p class="text-sm text-gray-500 text-center">Select client, beneficiary, and template to preview</p>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <!-- Recent Transactions Section -->
-  <div class="mt-8">
-    <h2 class="text-xl font-semibold mb-4 text-gray-800">Recent Transactions</h2>
-    <div class="bg-white rounded-lg shadow-sm overflow-x-auto">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
-          <tr>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Beneficiary</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Template</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          <tr>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">1 day ago</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Acme Corporation</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">John Doe</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Invoice Template</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Success</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">3 days ago</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Globex Industries</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Robert Johnson</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Contract Template</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Success</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+
 </div> 

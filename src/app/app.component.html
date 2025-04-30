@@ -6,7 +6,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
-        <h1 class="text-xl font-semibold text-gray-800">PDF Wizard</h1>
+        <h1 class="text-xl font-semibold text-gray-800">{{ 'APP.TITLE' | transloco }}</h1>
       </div>
     </div>
     <nav class="mt-6">
@@ -15,20 +15,28 @@
         routerLinkActive="bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600"
         class="px-6 py-3 flex items-center space-x-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition duration-200"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 me-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
         </svg>
-        <span>Manage Entities</span>
+        <span>{{ 'NAV.MANAGE_ENTITIES' | transloco }}</span>
       </a>
       <a 
-        routerLink="/transaction" 
+        routerLink="/pdf-generator" 
         routerLinkActive="bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600"
         class="px-6 py-3 flex items-center space-x-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition duration-200"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 me-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
-        <span>Generate PDF</span>
+        <span>{{ 'NAV.GENERATE_PDF' | transloco }}</span>
+      </a>
+      <a 
+        routerLink="/recent-transactions" 
+        routerLinkActive="bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600"
+        class="px-6 py-3 flex items-center space-x-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition duration-200"
+      >
+      <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="h-5 w-5 me-1 icon icon-tabler icons-tabler-outline icon-tabler-transaction-dollar"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20.8 13a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" /><path d="M18 11v10" /><path d="M5 5m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 5m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M7 5h8" /><path d="M7 5v8a3 3 0 0 0 3 3h1" /></svg>
+        <span>{{ 'PDF.RECENT' | transloco }}</span>
       </a>
     </nav>
   </div>
@@ -36,15 +44,18 @@
   <!-- Main Content -->
   <div class="flex-1 flex flex-col">
     <!-- Header -->
-    <header class="bg-white shadow-sm py-4 px-6 flex justify-between items-center">
-      <h1 class="text-xl font-semibold text-gray-800">{{ title }}</h1>
+    <header class="bg-white shadow-sm py-4 px-6 flex justify-end items-center">
       <div class="flex items-center space-x-4">
-        <button class="flex items-center space-x-2 text-gray-700 hover:text-indigo-600">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          <span>Admin</span>
+        <button class="flex items-center space-x-2 text-gray-700 hover:text-indigo-600" [ngClass]="{ 'text-indigo-600': activeLang === 'ar' }">
+          <svg class="w-5 h-5 me-1" enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><circle cx="256" cy="256" fill="#6da544" r="256"/><g fill="#f0f0f0"><path d="m144.696 306.087c0 18.441 14.95 33.391 33.391 33.391h100.174c0 15.368 12.458 27.826 27.826 27.826h33.391c15.368 0 27.826-12.458 27.826-27.826v-33.391z"/><path d="m370.087 144.696v77.913c0 12.275-9.986 22.261-22.261 22.261v33.391c30.687 0 55.652-24.966 55.652-55.652v-77.913z"/><path d="m130.783 222.609c0 12.275-9.986 22.261-22.261 22.261v33.391c30.687 0 55.652-24.966 55.652-55.652v-77.913h-33.391z"/><path d="m320 144.696h33.391v77.913h-33.391z"/><path d="m269.913 189.217c0 3.069-2.497 5.565-5.565 5.565s-5.565-2.497-5.565-5.565v-44.522h-33.391v44.522c0 3.069-2.497 5.565-5.565 5.565s-5.565-2.497-5.565-5.565v-44.522h-33.392v44.522c0 21.481 17.476 38.957 38.957 38.957 8.273 0 15.945-2.6 22.261-7.016 6.315 4.415 13.988 7.016 22.261 7.016 1.666 0 3.304-.117 4.915-.322-2.366 9.749-11.146 17.017-21.611 17.017v33.391c30.687 0 55.652-24.966 55.652-55.652v-33.391-44.522h-33.391v44.522z"/><path d="m180.87 244.87h50.087v33.391h-50.087z"/></g><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/></svg>
+          <a class="" (click)="setActiveLang('ar')">
+            <span class="">{{ "LANGUAGE.ARABIC" | transloco }}</span>
+          </a>        </button>
+        <button class="flex items-center space-x-2 text-gray-700 hover:text-indigo-600" [ngClass]="{ 'text-indigo-600': activeLang === 'en' }">
+          <svg class="w-5 h-5 me-1" enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><circle cx="256" cy="256" fill="#f0f0f0" r="256"/><g fill="#0052b4"><path d="m52.92 100.142c-20.109 26.163-35.272 56.318-44.101 89.077h133.178z"/><path d="m503.181 189.219c-8.829-32.758-23.993-62.913-44.101-89.076l-89.075 89.076z"/><path d="m8.819 322.784c8.83 32.758 23.993 62.913 44.101 89.075l89.074-89.075z"/><path d="m411.858 52.921c-26.163-20.109-56.317-35.272-89.076-44.102v133.177z"/><path d="m100.142 459.079c26.163 20.109 56.318 35.272 89.076 44.102v-133.176z"/><path d="m189.217 8.819c-32.758 8.83-62.913 23.993-89.075 44.101l89.075 89.075z"/><path d="m322.783 503.181c32.758-8.83 62.913-23.993 89.075-44.101l-89.075-89.075z"/><path d="m370.005 322.784 89.075 89.076c20.108-26.162 35.272-56.318 44.101-89.076z"/></g><g fill="#d80027"><path d="m509.833 222.609h-220.44-.001v-220.442c-10.931-1.423-22.075-2.167-33.392-2.167-11.319 0-22.461.744-33.391 2.167v220.44.001h-220.442c-1.423 10.931-2.167 22.075-2.167 33.392 0 11.319.744 22.461 2.167 33.391h220.44.001v220.442c10.931 1.423 22.073 2.167 33.392 2.167 11.317 0 22.461-.743 33.391-2.167v-220.44-.001h220.442c1.423-10.931 2.167-22.073 2.167-33.392 0-11.317-.744-22.461-2.167-33.391z"/><path d="m322.783 322.784 114.236 114.236c5.254-5.252 10.266-10.743 15.048-16.435l-97.802-97.802h-31.482z"/><path d="m189.217 322.784h-.002l-114.235 114.235c5.252 5.254 10.743 10.266 16.435 15.048l97.802-97.804z"/><path d="m189.217 189.219v-.002l-114.236-114.237c-5.254 5.252-10.266 10.743-15.048 16.435l97.803 97.803h31.481z"/><path d="m322.783 189.219 114.237-114.238c-5.252-5.254-10.743-10.266-16.435-15.047l-97.802 97.803z"/></g><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/></svg>
+          <a class="" (click)="setActiveLang('en')">
+            <span class="">{{ "LANGUAGE.ENGLISH" | transloco }}</span>
+          </a>        
         </button>
       </div>
     </header>
@@ -54,9 +65,5 @@
       <router-outlet></router-outlet>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white text-gray-500 text-center py-3 text-sm border-t">
-      <p>PDF Wizard © {{ currentYear }} | All Rights Reserved</p>
-    </footer>
   </div>
 </div>

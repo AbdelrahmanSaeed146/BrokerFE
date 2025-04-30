@@ -18,13 +18,20 @@
             "ADDRESS": "Address",
             "ADDRESS_REQUIRED": "Address is required",
             "SECTOR": "Sector",
+            "SECTOR_REQUIRED": "Sector is required",
             "SOURCE_OF_FUND": "Source of Fund",
+            "SOURCE_OF_FUND_REQUIRED": "Source of Fund is required",
             "TYPE_OF_GOODS": "Type of Goods",
+            "TYPE_OF_GOODS_REQUIRED": "Type of Goods is required",
             "BANKING_INFO": "Banking Information",
             "ACCOUNT_NUMBER": "Account Number",
+            "ACCOUNT_NUMBER_REQUIRED": "Account Number is required",
             "BANK_NAME": "Bank Name",
+            "BANK_NAME_REQUIRED": "Bank Name is required",
             "BANK_BRANCH": "Bank Branch",
+            "BANK_BRANCH_REQUIRED": "Bank Branch is required",
             "BANK_SWIFT": "Bank SWIFT Code",
+            "BANK_SWIFT_REQUIRED": "Bank SWIFT Code is required",
             "ENTITY_TYPE": "Entity Type",
             "IS_CLIENT": "This is a Client",
             "IS_BENEFICIARY": "This is a Beneficiary"
@@ -62,8 +69,11 @@
             "CURRENCY": "Currency",
             "CURRENCY_REQUIRED": "Currency is required",
             "PURPOSE": "Purpose of Transfer",
+            "PURPOSE_REQUIRED": "Purpose of Transfer is required",
             "SOURCE_OF_FUND": "Source of Fund",
-            "TYPE_OF_GOODS": "Type of Goods"
+            "SOURCE_OF_FUND_REQUIRED": "Source of Fund is required",
+            "TYPE_OF_GOODS": "Type of Goods",
+            "TYPE_OF_GOODS_REQUIRED": "Type of Goods is required"
         },
         "PLACEHOLDERS": {
             "CLIENT": "Select a client",
@@ -98,5 +108,9 @@
         "ERROR": {
             "DEFAULT": "An error occurred. Please try again."
         }
+    },
+    "LANGUAGE": {
+        "ENGLISH": "English",
+        "ARABIC": "Arabic"
     }
 }
