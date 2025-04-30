@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
@@ -12,11 +12,15 @@ import { TranslocoPipe } from '@ngneat/transloco';
     styleUrls: ['./transaction-form.component.scss']
 })
 export class TransactionFormComponent implements OnInit {
+    private destroyRef = inject(DestroyRef);
     transactionForm!: FormGroup;
     submitted = false;
     errorMessage = '';
     successMessage = '';
     loading = false;
+    clients = signal<any>([])
+    beneficiaries = signal<any>([])
+    templates = signal<any>([])
 
     // UUID Regex pattern for validation
     uuidPattern = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
@@ -32,14 +36,14 @@ export class TransactionFormComponent implements OnInit {
 
     initForm(): void {
         this.transactionForm = this.formBuilder.group({
-            ClientId: ['', [Validators.required, Validators.pattern(this.uuidPattern)]],
-            BeneficiaryId: ['', [Validators.required, Validators.pattern(this.uuidPattern)]],
-            TemplateId: ['', [Validators.required, Validators.pattern(this.uuidPattern)]],
+            ClientId: ['', [Validators.required]],
+            BeneficiaryId: ['', [Validators.required]],
+            TemplateId: ['', [Validators.required]],
             Amount: ['', [Validators.required, Validators.min(0)]],
             Currency: ['', Validators.required],
-            PurposeOfTransfer: [''],
-            SourceOfFund: [''],
-            TypeOfGoods: ['']
+            PurposeOfTransfer: ['', Validators.required],
+            SourceOfFund: ['', Validators.required],
+            TypeOfGoods: ['', Validators.required]
         });
     }
 
@@ -70,6 +74,7 @@ export class TransactionFormComponent implements OnInit {
                 this.successMessage = 'Transaction created successfully! PDF has been generated.';
                 this.transactionForm.reset();
                 this.submitted = false;
+                window.open(response.value.filePath, '_blank'); // Open the PDF in a new tab
             },
             error: (error) => {
                 this.loading = false;
@@ -78,4 +83,42 @@ export class TransactionFormComponent implements OnInit {
             }
         });
     }
+
+    getClients(): void {
+        this.apiService.getAllClients().subscribe({
+            next: (response) => {
+                // Handle the response as needed
+                this.clients.set(response.items)
+            },
+            error: (error) => {
+                console.error('Error fetching clients:', error);
+            }
+        });
+    }
+    getBeneficiaries(): void {
+        this.apiService.getAllBeneficiaries().subscribe({
+            next: (response) => {
+                // Handle the response as needed
+                this.beneficiaries.set(response.items)
+            },
+            error: (error) => {
+                console.error('Error fetching clients:', error);
+            }
+        });
+    }
+    getTemplates(): void {
+        this.apiService.getAllTemplates().subscribe({
+            next: (response) => {
+                // Handle the response as needed
+                this.templates.set(response)
+            },
+            error: (error) => {
+                console.error('Error fetching clients:', error);
+            }
+        });
+    }
+    
+    nDestroy = this.destroyRef.onDestroy( () => {
+        this.transactionForm.reset();
+    })
 } 

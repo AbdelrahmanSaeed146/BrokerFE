@@ -28,4 +28,26 @@ export class ApiService {
     createTransaction(formData: FormData): Observable<any> {
         return this.http.post(`${this.apiBaseUrl}/api/Transaction/CreateTransaction`, formData);
     }
+
+    getAllTemplates(): Observable<any> {
+        return this.http.get(`${this.apiBaseUrl}/api/Template/GetAllTemplates`);
+    }
+    
+    getAllClients(): Observable<any> {
+        const formData = new FormData();
+        formData.append('PageNumber', '0');
+        formData.append('PageSize', '0');
+        formData.append('SortBy', 'id');
+        formData.append('IsDescending', 'true');
+        return this.http.post(`${this.apiBaseUrl}/api/ClientBeneficiary/GetAllClients`, formData);
+    }
+
+    getAllBeneficiaries(): Observable<any> {
+        const formData = new FormData();
+        formData.append('PageNumber', '0');
+        formData.append('PageSize', '0');
+        formData.append('SortBy', 'id');
+        formData.append('IsDescending', 'true');
+        return this.http.post(`${this.apiBaseUrl}/api/ClientBeneficiary/GetAllBeneficiaries`, formData);
+    }
 } 

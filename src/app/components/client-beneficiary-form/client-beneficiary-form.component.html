@@ -1,10 +1,10 @@
-<div>
+<div class="mx-5">
   <div class="mb-6">
     <h1 class="text-2xl font-bold text-gray-800">{{ 'ENTITIES.TITLE' | transloco }}</h1>
     <p class="text-gray-600">{{ 'ENTITIES.SUBTITLE' | transloco }}</p>
   </div>
   
-  <div class="bg-white rounded-lg shadow-sm p-6">
+  <div class="bg-white rounded-lg shadow-sm p-12">
     <h2 class="text-xl font-semibold mb-6 text-gray-800">{{ 'ENTITIES.FORM_TITLE' | transloco }}</h2>
     
     <form [formGroup]="clientBeneficiaryForm" (ngSubmit)="onSubmit()">
@@ -50,7 +50,11 @@
             id="sector" 
             formControlName="Sector" 
             class="form-input"
-            [placeholder]= "'ENTITIES.PLACEHOLDERS.SECTOR' | transloco"          >
+            [placeholder]= "'ENTITIES.PLACEHOLDERS.SECTOR' | transloco"
+            [ngClass]="{'border-red-500': submitted && f['Name'].errors}">
+            <div *ngIf="submitted && f['Sector'].errors" class="form-error">
+              <div *ngIf="f['Sector'].errors['required']">{{ 'ENTITIES.FIELDS.SECTOR_REQUIRED' | transloco }}</div>
+            </div>
         </div>
 
         <!-- Source of Fund Field -->
@@ -61,7 +65,11 @@
             id="sourceOfFund" 
             formControlName="SourceOfFund" 
             class="form-input"
-            [placeholder]= "'ENTITIES.PLACEHOLDERS.SOURCE_OF_FUND' | transloco"          >
+            [placeholder]= "'ENTITIES.PLACEHOLDERS.SOURCE_OF_FUND' | transloco"
+            [ngClass]="{'border-red-500': submitted && f['Name'].errors}">
+            <div *ngIf="submitted && f['SourceOfFund'].errors" class="form-error">
+              <div *ngIf="f['SourceOfFund'].errors['required']">{{ 'ENTITIES.FIELDS.SOURCE_OF_FUND_REQUIRED' | transloco }}</div>
+            </div>
         </div>
       </div>
 
@@ -73,7 +81,11 @@
           id="typeOfGoods" 
           formControlName="TypeOfGoods" 
           class="form-input"
-          [placeholder]= "'ENTITIES.PLACEHOLDERS.TYPE_OF_GOODS' | transloco"        >
+          [placeholder]= "'ENTITIES.PLACEHOLDERS.TYPE_OF_GOODS' | transloco"
+          [ngClass]="{'border-red-500': submitted && f['Name'].errors}">
+          <div *ngIf="submitted && f['TypeOfGoods'].errors" class="form-error">
+            <div *ngIf="f['TypeOfGoods'].errors['required']">{{ 'ENTITIES.FIELDS.TYPE_OF_GOODS_REQUIRED' | transloco }}</div>
+          </div>
       </div>
 
       <!-- Banking Information Section -->
@@ -89,7 +101,11 @@
               id="accountNo" 
               formControlName="AccountNo" 
               class="form-input"
-              [placeholder]= "'ENTITIES.PLACEHOLDERS.ACCOUNT_NUMBER' | transloco"            >
+              [placeholder]= "'ENTITIES.PLACEHOLDERS.ACCOUNT_NUMBER' | transloco"
+              [ngClass]="{'border-red-500': submitted && f['Name'].errors}">
+              <div *ngIf="submitted && f['AccountNo'].errors" class="form-error">
+                <div *ngIf="f['AccountNo'].errors['required']">{{ 'ENTITIES.FIELDS.ACCOUNT_NUMBER_REQUIRED' | transloco }}</div>
+              </div>
           </div>
 
           <!-- Bank Name Field -->
@@ -100,7 +116,11 @@
               id="bankName" 
               formControlName="BankName" 
               class="form-input"
-              [placeholder]= "'ENTITIES.PLACEHOLDERS.BANK_NAME' | transloco"            >
+              [placeholder]= "'ENTITIES.PLACEHOLDERS.BANK_NAME' | transloco"
+              [ngClass]="{'border-red-500': submitted && f['Name'].errors}">
+              <div *ngIf="submitted && f['BankName'].errors" class="form-error">
+                <div *ngIf="f['BankName'].errors['required']">{{ 'ENTITIES.FIELDS.BANK_NAME_REQUIRED' | transloco }}</div>
+              </div>
           </div>
 
           <!-- Bank Branch Field -->
@@ -111,7 +131,11 @@
               id="bankBranch" 
               formControlName="BankBranch" 
               class="form-input"
-              [placeholder]= "'ENTITIES.PLACEHOLDERS.BANK_BRANCH' | transloco"            >
+              [placeholder]= "'ENTITIES.PLACEHOLDERS.BANK_BRANCH' | transloco"
+              [ngClass]="{'border-red-500': submitted && f['Name'].errors}">
+              <div *ngIf="submitted && f['BankBranch'].errors" class="form-error">
+                <div *ngIf="f['BankBranch'].errors['required']">{{ 'ENTITIES.FIELDS.BANK_BRANCH_REQUIRED' | transloco }}</div>
+              </div>
           </div>
 
           <!-- Bank Swift Code Field -->
@@ -123,7 +147,11 @@
               formControlName="BankSwiftCode" 
               class="form-input"
               [placeholder]= "'ENTITIES.PLACEHOLDERS.BANK_SWIFT' | transloco"
-            >
+              [ngClass]="{'border-red-500': submitted && f['Name'].errors}"
+              >
+            <div *ngIf="submitted && f['BankSwiftCode'].errors" class="form-error">
+              <div *ngIf="f['BankSwiftCode'].errors['required']">{{ 'ENTITIES.FIELDS.BANK_SWIFT_REQUIRED' | transloco }}</div>
+            </div>
           </div>
         </div>
       </div>

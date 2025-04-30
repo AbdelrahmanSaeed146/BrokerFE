@@ -1,4 +1,4 @@
-<div>
+<div class="mx-5">
   <div class="mb-6">
     <h1 class="text-2xl font-bold text-gray-800">{{ 'PDF.TITLE' | transloco }}</h1>
     <p class="text-gray-600">{{ 'PDF.SUBTITLE' | transloco }}</p>
@@ -7,7 +7,7 @@
   <div class="grid grid-cols-1 gap-6">
     <!-- Form Section -->
     <div class="lg:col-span-2">
-      <div class="bg-white rounded-lg shadow-sm p-6">
+      <div class="bg-white rounded-lg shadow-sm p-12">
         <h2 class="text-xl font-semibold mb-6 flex items-center text-gray-800">
           <svg class="w-5 h-5 mr-2 me-1 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -27,9 +27,10 @@
                 class="form-input"
                 [ngClass]="{'border-red-500': submitted && f['ClientId'].errors}"
               >
-                <option value="">{{ 'PDF.PLACEHOLDERS.CLIENT' | transloco }}</option>
-                <option value="123e4567-e89b-12d3-a456-426614174000">Acme Corporation</option>
-                <option value="223e4567-e89b-12d3-a456-426614174001">Globex Industries</option>
+                <option value="" disabled>{{ 'PDF.PLACEHOLDERS.CLIENT' | transloco }}</option>
+                @for (client of clients(); track client.id) {
+                  <option [value]="client.id">{{ client.name }}</option>
+                }
               </select>
               <div *ngIf="submitted && f['ClientId'].errors" class="form-error">
                 <div *ngIf="f['ClientId'].errors['required']">{{ 'PDF.FIELDS.CLIENT_REQUIRED' | transloco }}</div>
@@ -45,9 +46,10 @@
                 class="form-input"
                 [ngClass]="{'border-red-500': submitted && f['BeneficiaryId'].errors}"
               >
-                <option value="">{{ 'PDF.PLACEHOLDERS.BENEFICIARY' | transloco }}</option>
-                <option value="323e4567-e89b-12d3-a456-426614174002">John Doe</option>
-                <option value="423e4567-e89b-12d3-a456-426614174003">Robert Johnson</option>
+                <option value="" disabled>{{ 'PDF.PLACEHOLDERS.BENEFICIARY' | transloco }}</option>
+                @for (beneficiary of beneficiaries(); track beneficiary.id) {
+                  <option [value]="beneficiary.id">{{ beneficiary.name }}</option>
+                }
               </select>
               <div *ngIf="submitted && f['BeneficiaryId'].errors" class="form-error">
                 <div *ngIf="f['BeneficiaryId'].errors['required']">{{ 'PDF.FIELDS.BENEFICIARY_REQUIRED' | transloco }}</div>
@@ -63,9 +65,10 @@
                 class="form-input"
                 [ngClass]="{'border-red-500': submitted && f['TemplateId'].errors}"
               >
-                <option value="">{{ 'PDF.PLACEHOLDERS.TEMPLATE' | transloco }}</option>
-                <option value="523e4567-e89b-12d3-a456-426614174004">Invoice Template</option>
-                <option value="623e4567-e89b-12d3-a456-426614174005">Contract Template</option>
+                <option value="" disabled>{{ 'PDF.PLACEHOLDERS.TEMPLATE' | transloco }}</option>
+                @for (template of templates(); track template.id) {
+                  <option [value]="template.id">{{ template.templateName }}</option>
+                }
               </select>
               <div *ngIf="submitted && f['TemplateId'].errors" class="form-error">
                 <div *ngIf="f['TemplateId'].errors['required']">{{ 'PDF.FIELDS.TEMPLATE_REQUIRED' | transloco }}</div>
@@ -119,7 +122,11 @@
                   formControlName="SourceOfFund" 
                   class="form-input"
                   [placeholder]= "'PDF.PLACEHOLDERS.SOURCE_OF_FUND' | transloco"
+                  [ngClass]="{'border-red-500': submitted && f['Currency'].errors}"
                 >
+                <div *ngIf="submitted && f['SourceOfFund'].errors" class="form-error">
+                  <div *ngIf="f['SourceOfFund'].errors['required']">{{ 'PDF.FIELDS.SOURCE_OF_FUND_REQUIRED' | transloco }}</div>
+                </div>
               </div>
 
               <!-- Type of Goods Field -->
@@ -131,7 +138,11 @@
                   formControlName="TypeOfGoods" 
                   class="form-input"
                   [placeholder]= "'PDF.PLACEHOLDERS.TYPE_OF_GOODS' | transloco"
+                  [ngClass]="{'border-red-500': submitted && f['Currency'].errors}"
                 >
+                <div *ngIf="submitted && f['TypeOfGoods'].errors" class="form-error">
+                  <div *ngIf="f['TypeOfGoods'].errors['required']">{{ 'PDF.FIELDS.TYPE_OF_GOODS_REQUIRED' | transloco }}</div>
+                </div>
               </div>
             </div>
 
@@ -144,7 +155,11 @@
                 class="form-input" 
                 rows="2"
                 [placeholder]= "'PDF.PLACEHOLDERS.PURPOSE' | transloco"
+                [ngClass]="{'border-red-500': submitted && f['Currency'].errors}"
               ></textarea>
+              <div *ngIf="submitted && f['PurposeOfTransfer'].errors" class="form-error">
+                <div *ngIf="f['PurposeOfTransfer'].errors['required']">{{ 'PDF.FIELDS.PURPOSE_REQUIRED' | transloco }}</div>
+              </div>
             </div>
             <!-- Form Submission -->
             <div class="mt-4">
