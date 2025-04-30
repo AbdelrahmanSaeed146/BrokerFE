@@ -2,7 +2,8 @@ import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
-import { TranslocoPipe } from '@ngneat/transloco';
+import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-transaction-form',
@@ -13,6 +14,9 @@ import { TranslocoPipe } from '@ngneat/transloco';
 })
 export class TransactionFormComponent implements OnInit {
     private destroyRef = inject(DestroyRef);
+    private translocoService = inject(TranslocoService);
+    currentLang = toSignal(this.translocoService.langChanges$);
+
     transactionForm!: FormGroup;
     submitted = false;
     errorMessage = '';
@@ -42,7 +46,7 @@ export class TransactionFormComponent implements OnInit {
             ClientId: ['', [Validators.required]],
             BeneficiaryId: ['', [Validators.required]],
             TemplateId: ['', [Validators.required]],
-            Amount: ['', [Validators.required, Validators.min(0)]],
+            Amount: ['', [Validators.required, Validators.min(0), Validators.pattern(/^[0-9]*$/)]],
             Currency: ['', Validators.required],
             PurposeOfTransfer: ['', Validators.required],
             SourceOfFund: ['', Validators.required],
@@ -124,4 +128,14 @@ export class TransactionFormComponent implements OnInit {
     nDestroy = this.destroyRef.onDestroy( () => {
         this.transactionForm.reset();
     })
-} 
+    currencies = [
+        { code: 'USD', nameEn: 'US Dollar', nameAr: 'دولار أمريكي' },
+        { code: 'EUR', nameEn: 'Euro', nameAr: 'يورو' },
+        { code: 'EGP', nameEn: 'Egyptian Pound', nameAr: 'جنيه مصري' },
+        { code: 'GBP', nameEn: 'British Pound', nameAr: 'جنيه إسترليني' },
+        { code: 'AUD', nameEn: 'Australian Dollar', nameAr: 'دولار أسترالي' },
+        { code: 'CAD', nameEn: 'Canadian Dollar', nameAr: 'دولار كندي' },
+        { code: 'CHF', nameEn: 'Swiss Franc', nameAr: 'فرنك سويسري' },
+        { code: 'CNY', nameEn: 'Chinese Yuan', nameAr: 'يوان صيني' },
+    ];
+}

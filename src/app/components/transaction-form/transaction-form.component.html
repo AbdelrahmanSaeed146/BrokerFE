@@ -98,16 +98,21 @@
               <!-- Currency Field -->
               <div>
                 <label for="currency" class="form-label">{{ 'PDF.FIELDS.CURRENCY' | transloco }}</label>
-                <input 
-                  type="text" 
-                  id="currency" 
-                  formControlName="Currency" 
-                  class="form-input" 
-                  [ngClass]="{'border-red-500': submitted && f['Currency'].errors}"
-                  [placeholder]= "'PDF.PLACEHOLDERS.CURRENCY' | transloco"
+                <select
+                    id="currency"
+                    formControlName="Currency"
+                    class="form-input"
+                    [ngClass]="{'border-red-500': submitted && f['Currency'].errors}"
                 >
+                    <option value="" disabled>{{ 'PDF.PLACEHOLDERS.CURRENCY' | transloco }}</option>
+                    @for (currency of currencies; track currency.code) {
+                        <option [value]="currency.code">
+                            {{ currency.code }} - {{ currentLang() === 'ar' ? currency.nameAr : currency.nameEn }}
+                        </option>
+                    }
+                </select>
                 <div *ngIf="submitted && f['Currency'].errors" class="form-error">
-                  <div *ngIf="f['Currency'].errors['required']">{{ 'PDF.FIELDS.CURRENCY_REQUIRED' | transloco }}</div>
+                    <div *ngIf="f['Currency'].errors['required']">{{ 'PDF.FIELDS.CURRENCY_REQUIRED' | transloco }}</div>
                 </div>
               </div>
             </div>
@@ -174,7 +179,7 @@
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
                 </span>
-                <svg class="w-5 h-5 mr-2 me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-5 h-5 me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                 </svg>
                 {{ loading ? ('PDF.BUTTONS.PROCESSING' | transloco) : ('PDF.BUTTONS.GENERATE' | transloco)}}
@@ -193,20 +198,5 @@
         </form>
       </div>
     </div>
-    
-    <!-- Preview Section -->
-    <!-- <div class="lg:col-span-1">
-      <div class="bg-white rounded-lg shadow-sm p-6 flex flex-col items-center justify-center h-full">
-        <div class="w-24 h-32 bg-gray-100 border border-gray-200 rounded-lg mb-4 flex items-center justify-center">
-          <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-          </svg>
-        </div>
-        <p class="text-sm text-gray-500 text-center">Select client, beneficiary, and template to preview</p>
-      </div>
-    </div> -->
   </div>
-
-  <!-- Recent Transactions Section -->
-
-</div> 
+</div>

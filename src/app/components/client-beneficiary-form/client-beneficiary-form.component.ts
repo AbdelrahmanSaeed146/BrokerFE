@@ -35,10 +35,10 @@ export class ClientBeneficiaryFormComponent implements OnInit {
             Sector: ['', Validators.required],
             SourceOfFund: ['', Validators.required],
             TypeOfGoods: ['', Validators.required],
-            AccountNo: ['', Validators.required],
+            AccountNo: ['', Validators.required, Validators.pattern(/^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$/)],
             BankName: ['', Validators.required],
             BankBranch: ['', Validators.required],
-            BankSwiftCode: ['', Validators.required],
+            BankSwiftCode: ['', Validators.required, Validators.pattern(/^[A-Z]{4}[-]{0,1}[A-Z]{2}[-]{0,1}[A-Z0-9]{2}[-]{0,1}[0-9]{3}$/)],
             IsCustomer: [true],
             IsBeneficiary: [false]
         });

@@ -8,28 +8,21 @@
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" [ngClass]="{ 'text-right': currentLang() === 'ar' }">{{ 'PDF.TRANSACTION_TABLE.CLIENT' | transloco }}</th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" [ngClass]="{ 'text-right': currentLang() === 'ar' }">{{ 'PDF.TRANSACTION_TABLE.BENEFICIARY' | transloco }}</th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" [ngClass]="{ 'text-right': currentLang() === 'ar' }">{{ 'PDF.TRANSACTION_TABLE.TEMPLATE' | transloco }}</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" [ngClass]="{ 'text-right': currentLang() === 'ar' }">{{ 'PDF.TRANSACTION_TABLE.STATUS' | transloco }}</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" [ngClass]="{ 'text-right': currentLang() === 'ar' }">{{ 'PDF.FIELDS.AMOUNT' | transloco }}</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" [ngClass]="{ 'text-right': currentLang() === 'ar' }">{{ 'PDF.FIELDS.CURRENCY' | transloco }}</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">1 day ago</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Acme Corporation</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">John Doe</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Invoice Template</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{{ 'PDF.TRANSACTION_TABLE.SUCCESS' | transloco }}</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">3 days ago</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Globex Industries</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Robert Johnson</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Contract Template</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{{ 'PDF.TRANSACTION_TABLE.SUCCESS' | transloco }}</span>
-            </td>
-          </tr>
+          @for (item of transactions(); track item.id) {
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ getRelativeTime(item.createdDate) }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ item.clientName }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ item.beneficiaryName }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ item.templateName }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ item.amount }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ item.currency }}</td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>

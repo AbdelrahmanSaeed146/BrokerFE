@@ -32,11 +32,15 @@ export class ApiService {
     getAllTemplates(): Observable<any> {
         return this.http.get(`${this.apiBaseUrl}/api/Template/GetAllTemplates`);
     }
+
+    getAllTransactions(): Observable<any> {
+        return this.http.get(`${this.apiBaseUrl}/api/Transaction/GetAllTransactions`);
+    }
     
     getAllClients(): Observable<any> {
         const formData = new FormData();
         formData.append('PageNumber', '0');
-        formData.append('PageSize', '0');
+        formData.append('PageSize', '10000');
         formData.append('SortBy', 'id');
         formData.append('IsDescending', 'true');
         return this.http.post(`${this.apiBaseUrl}/api/ClientBeneficiary/GetAllClients`, formData);
@@ -45,7 +49,7 @@ export class ApiService {
     getAllBeneficiaries(): Observable<any> {
         const formData = new FormData();
         formData.append('PageNumber', '0');
-        formData.append('PageSize', '0');
+        formData.append('PageSize', '10000');
         formData.append('SortBy', 'id');
         formData.append('IsDescending', 'true');
         return this.http.post(`${this.apiBaseUrl}/api/ClientBeneficiary/GetAllBeneficiaries`, formData);

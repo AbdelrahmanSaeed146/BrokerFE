@@ -17,9 +17,14 @@ export class AppComponent {
   currentLang = computed(() => this.langService.currentLang() === 'ar' ? 'عربي' : 'English');
   
   activeLang: string = 'ar'; // Default language
+  isMobileMenuOpen: boolean = false; // Add this line for mobile menu state
 
   setActiveLang(lang: string): void {
     this.langService.setActiveLang(lang)
     this.activeLang = lang;
+  }
+
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 }

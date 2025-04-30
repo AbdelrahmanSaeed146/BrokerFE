@@ -1,11 +1,41 @@
-<div class="min-h-screen flex bg-gray-50">
+<div class="min-h-screen flex bg-gray-50" [dir]="activeLang === 'ar' ? 'rtl' : 'ltr'">
+  <!-- Mobile menu button -->
+  <button 
+    class="lg:hidden fixed top-4 z-20 p-2 rounded-md bg-indigo-600 text-white"
+    [ngClass]="activeLang === 'ar' ? 'right-4' : 'left-4'"
+    (click)="toggleMobileMenu()"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M4 6h16M4 12h16M4 18h16"
+      />
+    </svg>
+  </button>
+
   <!-- Sidebar -->
-  <div class="w-64 bg-white shadow-md">
+  <div 
+    class="fixed lg:static lg:w-64 w-64 bg-white shadow-md min-h-screen z-10 transition-transform duration-300 ease-in-out transform"
+    [ngClass]="{
+      'translate-x-0': isMobileMenuOpen,
+      'translate-x-full': !isMobileMenuOpen && activeLang === 'ar',
+      '-translate-x-full': !isMobileMenuOpen && activeLang === 'en',
+      'lg:translate-x-0': true
+    }"
+  >
     <div class="p-6">
-      <div class="flex items-center space-x-2">
+      <div class="flex items-center rtl:space-x-reverse space-x-3">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 text-indigo-600"
+          class="h-6 w-6 text-indigo-600 flex-shrink-0"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -17,7 +47,7 @@
             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
           />
         </svg>
-        <h1 class="text-xl font-semibold text-gray-800">
+        <h1 class="text-xl font-semibold text-gray-800 truncate">
           {{ "APP.TITLE" | transloco }}
         </h1>
       </div>
@@ -27,6 +57,7 @@
         routerLink="/client-beneficiary"
         routerLinkActive="bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600"
         class="px-6 py-3 flex items-center space-x-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition duration-200"
+        (click)="isMobileMenuOpen && toggleMobileMenu()"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -48,6 +79,7 @@
         routerLink="/pdf-generator"
         routerLinkActive="bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600"
         class="px-6 py-3 flex items-center space-x-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition duration-200"
+        (click)="isMobileMenuOpen && toggleMobileMenu()"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -69,6 +101,7 @@
         routerLink="/recent-transactions"
         routerLinkActive="bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600"
         class="px-6 py-3 flex items-center space-x-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition duration-200"
+        (click)="isMobileMenuOpen && toggleMobileMenu()"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -96,6 +129,13 @@
       </a>
     </nav>
   </div>
+
+  <!-- Overlay for mobile -->
+  <div 
+    *ngIf="isMobileMenuOpen" 
+    class="fixed inset-0 bg-black bg-opacity-50 z-0 lg:hidden"
+    (click)="toggleMobileMenu()"
+  ></div>
 
   <!-- Main Content -->
   <div class="flex-1 flex flex-col">
