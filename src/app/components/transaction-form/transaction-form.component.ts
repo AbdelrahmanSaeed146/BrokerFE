@@ -78,6 +78,13 @@ export class TransactionFormComponent implements OnInit {
                 this.transactionForm.reset();
                 this.submitted = false;
                 window.open(response.value.filePath, '_blank'); // Open the PDF in a new tab
+                const blob = new Blob([response.value.filePath], { type: 'application/pdf' });
+                const link = document.createElement('a');
+                const objectUrl = URL.createObjectURL(blob);
+                link.href = objectUrl;
+                link.download = 'template.pdf';
+                link.click();
+                URL.revokeObjectURL(objectUrl);
             },
             error: (error) => {
                 this.loading = false;
