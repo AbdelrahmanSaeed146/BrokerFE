@@ -32,6 +32,9 @@ export class TransactionFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.initForm();
+        this.getClients();
+        this.getBeneficiaries();
+        this.getTemplates();
     }
 
     initForm(): void {
