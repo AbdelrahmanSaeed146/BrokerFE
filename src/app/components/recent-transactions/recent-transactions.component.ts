@@ -17,11 +17,29 @@ export class RecentTransactionsComponent {
   
   currentLang = toSignal(this.translocoService.langChanges$);
   transactions = signal<any>([]);
+  
+  // Use API service's pagination state
+  currentPage = this.apiService.currentPage;
+  pageSize = this.apiService.pageSize;
+  totalItems = this.apiService.totalItems;
+  totalPages = this.apiService.totalPages;
+  Math = Math; // Make Math available in template
 
-  getAllTransactions() {
-    this.apiService.getAllTransactions().subscribe((res: any) => {
+  ngOnInit() {
+    this.loadTransactions();
+  }
+
+  loadTransactions() {
+    this.apiService.getPagedTransactions(this.currentPage(), this.pageSize()).subscribe((res: any) => {
       this.transactions.set(res.items);
+      this.totalItems.set(res.totalCount);
+      this.totalPages.set(Math.ceil(res.totalCount / this.pageSize()));
     });
+  }
+
+  onPageChange(page: number) {
+    this.currentPage.set(page);
+    this.loadTransactions();
   }
 
   getRelativeTime(dateString: string): string {

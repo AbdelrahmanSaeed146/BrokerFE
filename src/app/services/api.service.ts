@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -8,6 +8,12 @@ import { environment } from '../../environments/environment';
 })
 export class ApiService {
     private apiBaseUrl = environment.apiBaseUrl;
+
+    // Pagination state
+    currentPage = signal(1);
+    pageSize = signal(10);
+    totalItems = signal(0);
+    totalPages = signal(0);
 
     constructor(private http: HttpClient) { }
 
@@ -32,9 +38,14 @@ export class ApiService {
     getAllTemplates(): Observable<any> {
         return this.http.get(`${this.apiBaseUrl}/api/Template/GetAllTemplates`);
     }
+    
 
     getAllTransactions(): Observable<any> {
-        return this.http.get(`${this.apiBaseUrl}/api/Transaction/GetAllTransactions`);
+        return this.http.get(`${this.apiBaseUrl}/api/Transaction/GetPagedTransactions?PageNumber=1&PageSize=10000&SortBy=createdDate&IsDescending=true`);
+    }
+
+    getPagedTransactions(pageNumber: number, pageSize: number): Observable<any> {
+        return this.http.get(`${this.apiBaseUrl}/api/Transaction/GetPagedTransactions?PageNumber=${pageNumber}&PageSize=${pageSize}&SortBy=createdDate&IsDescending=true`);
     }
     
     getAllClients(): Observable<any> {

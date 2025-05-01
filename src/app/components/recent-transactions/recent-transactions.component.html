@@ -1,29 +1,204 @@
 <div class="mt-8 mx-5">
-    <h2 class="text-xl font-semibold mb-4 text-gray-800">{{ 'PDF.RECENT' | transloco }}</h2>
-    <div class="bg-white rounded-lg shadow-sm overflow-x-auto">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
-          <tr>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" [ngClass]="{ 'text-right': currentLang() === 'ar' }">{{ 'PDF.TRANSACTION_TABLE.TIME' | transloco }}</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" [ngClass]="{ 'text-right': currentLang() === 'ar' }">{{ 'PDF.TRANSACTION_TABLE.CLIENT' | transloco }}</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" [ngClass]="{ 'text-right': currentLang() === 'ar' }">{{ 'PDF.TRANSACTION_TABLE.BENEFICIARY' | transloco }}</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" [ngClass]="{ 'text-right': currentLang() === 'ar' }">{{ 'PDF.TRANSACTION_TABLE.TEMPLATE' | transloco }}</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" [ngClass]="{ 'text-right': currentLang() === 'ar' }">{{ 'PDF.FIELDS.AMOUNT' | transloco }}</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" [ngClass]="{ 'text-right': currentLang() === 'ar' }">{{ 'PDF.FIELDS.CURRENCY' | transloco }}</th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          @for (item of transactions(); track item.id) {
-            <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ getRelativeTime(item.createdDate) }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ item.clientName }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ item.beneficiaryName }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ item.templateName }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ item.amount }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ item.currency }}</td>
-            </tr>
-          }
-        </tbody>
-      </table>
+  <h2 class="text-xl font-semibold mb-4 text-gray-800">
+    {{ "PDF.RECENT" | transloco }}
+  </h2>
+  <div class="bg-white rounded-lg shadow-sm overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th
+            scope="col"
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            [ngClass]="{ 'text-right': currentLang() === 'ar' }"
+          >
+            {{ "PDF.TRANSACTION_TABLE.TIME" | transloco }}
+          </th>
+          <th
+            scope="col"
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            [ngClass]="{ 'text-right': currentLang() === 'ar' }"
+          >
+            {{ "PDF.TRANSACTION_TABLE.CLIENT" | transloco }}
+          </th>
+          <th
+            scope="col"
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            [ngClass]="{ 'text-right': currentLang() === 'ar' }"
+          >
+            {{ "PDF.TRANSACTION_TABLE.BENEFICIARY" | transloco }}
+          </th>
+          <th
+            scope="col"
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            [ngClass]="{ 'text-right': currentLang() === 'ar' }"
+          >
+            {{ "PDF.TRANSACTION_TABLE.TEMPLATE" | transloco }}
+          </th>
+          <th
+            scope="col"
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            [ngClass]="{ 'text-right': currentLang() === 'ar' }"
+          >
+            {{ "PDF.FIELDS.AMOUNT" | transloco }}
+          </th>
+          <th
+            scope="col"
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            [ngClass]="{ 'text-right': currentLang() === 'ar' }"
+          >
+            {{ "PDF.FIELDS.CURRENCY" | transloco }}
+          </th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        @for (item of transactions(); track item.id) {
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+            {{ getRelativeTime(item.createdDate) }}
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+            {{ item.clientName }}
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+            {{ item.beneficiaryName }}
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+            {{ item.templateName }}
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+            {{ item.amount }}
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+            {{ item.currency }}
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+
+    <!-- Pagination Controls -->
+    <div
+      class="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200 sm:px-6"
+    >
+      <div class="flex justify-between flex-1 sm:hidden">
+        <button
+          (click)="onPageChange(currentPage() - 1)"
+          [disabled]="currentPage() === 1"
+          class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+          [class.opacity-50]="currentPage() === 1"
+          [class.cursor-not-allowed]="currentPage() === 1"
+        >
+          {{ "COMMON.PREVIOUS" | transloco }}
+        </button>
+        <button
+          (click)="onPageChange(currentPage() + 1)"
+          [disabled]="currentPage() === totalPages()"
+          class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+          [class.opacity-50]="currentPage() === totalPages()"
+          [class.cursor-not-allowed]="currentPage() === totalPages()"
+        >
+          {{ "COMMON.NEXT" | transloco }}
+        </button>
+      </div>
+      <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+        <div>
+          <p class="text-sm text-gray-700">
+            {{ "COMMON.SHOWING" | transloco }}
+            <span class="font-medium">{{
+              (currentPage() - 1) * pageSize() + 1
+            }}</span>
+            {{ "COMMON.TO" | transloco }}
+            <span class="font-medium">{{
+              Math.min(currentPage() * pageSize(), totalItems())
+            }}</span>
+            {{ "COMMON.OF" | transloco }}
+            <span class="font-medium">{{ totalItems() }}</span>
+            {{ "COMMON.RESULTS" | transloco }}
+          </p>
+        </div>
+        <div>
+          <nav
+            class="inline-flex -space-x-px rounded-md shadow-sm isolate"
+            aria-label="Pagination"
+          >
+            <!-- Previous Button -->
+            <button
+              (click)="onPageChange(currentPage() - 1)"
+              [disabled]="currentPage() === 1"
+              class="relative inline-flex items-center px-2 py-2 text-gray-400 border border-gray-300 bg-white text-sm font-medium hover:bg-gray-50"
+              [class.rounded-l-md]="currentLang() !== 'ar'"
+              [class.rounded-r-md]="currentLang() === 'ar'"
+              [class.opacity-50]="currentPage() === 1"
+              [class.cursor-not-allowed]="currentPage() === 1"
+            >
+              <span class="sr-only">{{ "COMMON.PREVIOUS" | transloco }}</span>
+              <svg
+                class="w-5 h-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  *ngIf="currentLang() !== 'ar'"
+                  fill-rule="evenodd"
+                  d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+                  clip-rule="evenodd"
+                />
+                <path
+                  *ngIf="currentLang() === 'ar'"
+                  fill-rule="evenodd"
+                  d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </button>
+
+            @for (page of [].constructor(totalPages()); track $index) {
+            <button
+              (click)="onPageChange($index + 1)"
+              [class.bg-indigo-50]="currentPage() === $index + 1"
+              [class.text-indigo-600]="currentPage() === $index + 1"
+              [class.z-10]="currentPage() === $index + 1"
+              class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 border border-gray-300 hover:bg-gray-50"
+            >
+              {{ $index + 1 }}
+            </button>
+            }
+
+            <!-- Next Button -->
+            <button
+              (click)="onPageChange(currentPage() + 1)"
+              [disabled]="currentPage() === totalPages()"
+              class="relative inline-flex items-center px-2 py-2 text-gray-400 border border-gray-300 bg-white text-sm font-medium hover:bg-gray-50"
+              [class.rounded-r-md]="currentLang() !== 'ar'"
+              [class.rounded-l-md]="currentLang() === 'ar'"
+              [class.opacity-50]="currentPage() === totalPages()"
+              [class.cursor-not-allowed]="currentPage() === totalPages()"
+            >
+              <span class="sr-only">{{ "COMMON.NEXT" | transloco }}</span>
+              <svg
+                class="w-5 h-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  *ngIf="currentLang() !== 'ar'"
+                  fill-rule="evenodd"
+                  d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                  clip-rule="evenodd"
+                />
+                <path
+                  *ngIf="currentLang() === 'ar'"
+                  fill-rule="evenodd"
+                  d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </button>
+          </nav>
+        </div>
+      </div>
     </div>
   </div>
+</div>

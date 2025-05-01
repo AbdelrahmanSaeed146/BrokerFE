@@ -3,6 +3,14 @@
         "TITLE": "معالج PDF",
         "FOOTER": "معالج PDF © {{year}} | جميع الحقوق محفوظة"
     },
+    "COMMON": {
+        "PREVIOUS": "السابق",
+        "NEXT": "التالي",
+        "SHOWING": "عرض",
+        "TO": "إلى",
+        "OF": "من",
+        "RESULTS": "نتيجة"
+    },
     "NAV": {
         "MANAGE_ENTITIES": "إدارة العملاء",
         "GENERATE_PDF": "إنشاء PDF",

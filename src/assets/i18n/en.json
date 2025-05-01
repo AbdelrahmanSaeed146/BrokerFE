@@ -3,6 +3,14 @@
         "TITLE": "PDF Wizard",
         "FOOTER": "PDF Wizard © {{year}} | All Rights Reserved"
     },
+    "COMMON": {
+        "PREVIOUS": "Previous",
+        "NEXT": "Next",
+        "SHOWING": "Showing",
+        "TO": "to",
+        "OF": "of",
+        "RESULTS": "results"
+    },
     "NAV": {
         "MANAGE_ENTITIES": "Manage Entities",
         "GENERATE_PDF": "Generate PDF",
