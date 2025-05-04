@@ -1,0 +1,85 @@
+/* Form label styling */
+.form-label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+}
+
+/* Custom transition for hover effects */
+tr,
+button,
+a {
+    transition: all 0.2s ease;
+}
+
+/* Custom box shadow for cards and containers */
+.shadow-custom {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+/* Hover effect for rows */
+tr:hover {
+    background-color: #f9fafb;
+}
+
+/* Success and error message styling */
+.success-message {
+    @apply p-3 bg-green-50 text-green-800 rounded-md flex items-center mb-4;
+}
+
+.error-message {
+    @apply p-3 bg-red-50 text-red-800 rounded-md flex items-center mb-4;
+}
+
+/* Disabled button styling */
+button:disabled {
+    @apply opacity-50 cursor-not-allowed;
+}
+
+/* Responsive table adjustments */
+@media (max-width: 768px) {
+    table {
+        @apply text-xs;
+    }
+
+    th,
+    td {
+        @apply py-2 px-3;
+    }
+}
+
+/* Animation for table row entry */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+tr {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Modal animation */
+.fixed {
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.bg-white {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

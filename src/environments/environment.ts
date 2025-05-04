@@ -1,4 +1,5 @@
 export const environment = {
     production: false,
-    apiBaseUrl: 'https://localhost:7005'
+    apiBaseUrl: 'https://brokerapi.elixiraccesscard.com'
+    // apiBaseUrl: 'https://localhost:7005'
 }; 

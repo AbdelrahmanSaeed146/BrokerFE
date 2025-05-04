@@ -1,0 +1,303 @@
+<div class="mx-5">
+  <div class="mb-6">
+    <h1 class="text-2xl  text-gray-800">{{ 'ENTITIES.MANAGEMENT_TITLE' | transloco }}</h1>
+    <p class="text-gray-500 font-light">{{ 'ENTITIES.MANAGEMENT_SUBTITLE' | transloco }}</p>
+  </div>
+  
+  <div class="bg-white rounded-lg shadow-sm p-8">
+    <!-- Tab Navigation -->
+    <div class="flex border-b mb-6">
+      <button 
+        class="py-2 px-4 font-medium mr-2" 
+        [ngClass]="activeTab === 'client' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-gray-500 hover:text-gray-700'"
+        (click)="setActiveTab('client')"
+      >
+        {{ 'ENTITIES.TABS.CLIENTS' | transloco }}
+      </button>
+      <button 
+        class="py-2 px-4 font-medium" 
+        [ngClass]="activeTab === 'beneficiary' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-gray-500 hover:text-gray-700'"
+        (click)="setActiveTab('beneficiary')"
+      >
+        {{ 'ENTITIES.TABS.BENEFICIARIES' | transloco }}
+      </button>
+    </div>
+    
+    <!-- Filter/Search Controls - Can be implemented as needed -->
+    <div class="flex justify-between items-center mb-4">
+      <div class="text-xl font-medium">
+        {{ activeTab === 'client' ? ('ENTITIES.CLIENTS_LIST' | transloco) : ('ENTITIES.BENEFICIARIES_LIST' | transloco) }}
+      </div>
+      
+      <div class="flex items-center">
+        <a routerLink="/client-beneficiary" class="btn-primary bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+          </svg>
+          {{ 'ENTITIES.BUTTONS.CREATE_NEW' | transloco }}
+        </a>
+      </div>
+    </div>
+    
+    <!-- Table -->
+    <div class=" relative shadow-md sm:rounded-lg mb-6">
+      <table class="w-full text-sm  text-gray-500">
+        <thead [ngClass]="{ 'text-right': currentLang() === 'ar' , 'text-left': currentLang() === 'en'}"
+        class="text-xs text-gray-700 uppercase bg-gray-50">
+          <tr>
+            <th scope="col" class="py-3 px-6">{{ 'ENTITIES.FIELDS.NAME' | transloco }}</th>
+            <th scope="col" class="py-3 px-6">{{ 'ENTITIES.FIELDS.ADDRESS' | transloco }}</th>
+            <th scope="col" class="py-3 px-6">{{ 'ENTITIES.FIELDS.SECTOR' | transloco }}</th>
+            <th scope="col" class="py-3 px-6">{{ 'ENTITIES.FIELDS.BANK_NAME' | transloco }}</th>
+            <th scope="col" class="py-3 px-6">{{ 'ENTITIES.FIELDS.ACCOUNT_NUMBER' | transloco }}</th>
+            <th scope="col" class="py-3 px-6" [ngClass]="{ 'text-right': currentLang() === 'ar' , 'text-left': currentLang() === 'en'}" >{{ 'ENTITIES.FIELDS.ACTIONS' | transloco }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="loading" class="bg-white border-b hover:bg-gray-50">
+            <td colspan="6" class="py-10 text-center">
+              <div class="flex justify-center">
+                <svg class="animate-spin h-8 w-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="!loading && currentEntities.length === 0" class="bg-white border-b hover:bg-gray-50">
+            <td colspan="6" class="py-10 text-center text-gray-500">
+              {{ activeTab === 'client' ? ('ENTITIES.NO_CLIENTS' | transloco) : ('ENTITIES.NO_BENEFICIARIES' | transloco) }}
+            </td>
+          </tr>
+          <tr *ngFor="let entity of currentEntities" class="bg-white border-b hover:bg-gray-50">
+            <td class="py-4 px-6 font-medium">{{ entity.name }}</td>
+            <td class="py-4 px-6">{{ entity.address }}</td>
+            <td class="py-4 px-6">{{ entity.sector }}</td>
+            <td class="py-4 px-6">{{ entity.bankName }}</td>
+            <td class="py-4 px-6">{{ entity.accountNo }}</td>
+            <td class="py-4 px-6 text-center">
+              <div class="relative inline-block text-left">
+                <!-- Three dots icon without circle border -->
+                <button 
+                  (click)="toggleActionMenu(entity.id)" 
+                  class="text-gray-500 hover:text-gray-700 focus:outline-none"
+                  aria-expanded="true" 
+                  aria-haspopup="true"
+                >
+                  <!-- Simpler three dots icon without circles -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="1" />
+                    <circle cx="19" cy="12" r="1" />
+                    <circle cx="5" cy="12" r="1" />
+                  </svg>
+                </button>
+                
+                <!-- Smaller, simpler dropdown -->
+                <div 
+                  *ngIf="entity.id === activeEntityId" 
+                  class="origin-top-right absolute right-0 mt-1 w-36 rounded shadow-sm bg-white border border-gray-100 z-10"
+                  [ngClass]="{'right-0': currentLang() !== 'ar', 'left-0': currentLang() === 'ar'}"
+                >
+                  <div class="py-1" role="menu" aria-orientation="vertical">
+                    <button 
+                      (click)="editEntity(entity)" 
+                      class="w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center"
+                      role="menuitem"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 me-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                      </svg>
+                      {{ 'ENTITIES.BUTTONS.EDIT' | transloco }}
+                    </button>
+                    <button 
+                      (click)="confirmDelete(entity)" 
+                      class="w-full text-left px-3 py-1.5 text-sm text-red-600 hover:bg-gray-50 flex items-center"
+                      role="menuitem"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 me-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                      {{ 'ENTITIES.BUTTONS.DELETE' | transloco }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Pagination -->
+    <div class="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200 sm:px-6">
+      <!-- Mobile pagination -->
+      <div class="flex justify-between flex-1 sm:hidden">
+        <button
+          (click)="changePage(currentPage - 1)"
+          [disabled]="currentPage === 1"
+          class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+          [class.opacity-50]="currentPage === 1"
+          [class.cursor-not-allowed]="currentPage === 1"
+        >
+          {{ 'ENTITIES.PAGINATION.PREVIOUS' | transloco }}
+        </button>
+        <button
+          (click)="changePage(currentPage + 1)"
+          [disabled]="currentPage === totalPages"
+          class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+          [class.opacity-50]="currentPage === totalPages"
+          [class.cursor-not-allowed]="currentPage === totalPages"
+        >
+          {{ 'ENTITIES.PAGINATION.NEXT' | transloco }}
+        </button>
+      </div>
+      
+      <!-- Desktop pagination -->
+      <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+        <div>
+          <p class="text-sm text-gray-700">
+            {{ 'ENTITIES.PAGINATION.SHOWING' | transloco }}
+            <span class="font-medium">{{ ((currentPage - 1) * (activeTab === 'client' ? clientsPageSize : beneficiariesPageSize)) + 1 }}</span>
+            {{ 'ENTITIES.PAGINATION.TO' | transloco }}
+            <span class="font-medium">
+              {{ Math.min(currentPage * (activeTab === 'client' ? clientsPageSize : beneficiariesPageSize), 
+                activeTab === 'client' ? clientsTotalItems : beneficiariesTotalItems) }}
+            </span>
+            {{ 'ENTITIES.PAGINATION.OF' | transloco }}
+            <span class="font-medium">{{ activeTab === 'client' ? clientsTotalItems : beneficiariesTotalItems }}</span>
+            {{ 'ENTITIES.PAGINATION.RESULTS' | transloco }}
+          </p>
+        </div>
+        
+        <div>
+          <nav class="inline-flex -space-x-px rounded-md shadow-sm isolate" aria-label="Pagination">
+            <!-- Previous button -->
+            <button
+              (click)="changePage(currentPage - 1)"
+              [disabled]="currentPage === 1"
+              class="relative inline-flex items-center px-2 py-2 text-gray-400 border border-gray-300 bg-white text-sm font-medium hover:bg-gray-50 rounded-l-md"
+              [class.opacity-50]="currentPage === 1"
+              [class.cursor-not-allowed]="currentPage === 1"
+              [class.rounded-l-md]="currentLang() !== 'ar'"
+              [class.rounded-r-md]="currentLang() === 'ar'"
+            >
+              <span class="sr-only">{{ 'ENTITIES.PAGINATION.PREVIOUS' | transloco }}</span>
+              <svg
+              class="w-5 h-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                *ngIf="currentLang() !== 'ar'"
+                fill-rule="evenodd"
+                d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+                clip-rule="evenodd"
+              />
+              <path
+                *ngIf="currentLang() === 'ar'"
+                fill-rule="evenodd"
+                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            </button>
+            
+            <!-- Page numbers -->
+            <button 
+              *ngFor="let page of getPageNumbers()"
+              (click)="changePage(page)"
+              class="relative inline-flex items-center px-4 py-2 text-sm font-semibold border border-gray-300 hover:bg-gray-50"
+              [class.bg-indigo-50]="page === currentPage"
+              [class.text-indigo-600]="page === currentPage"
+              [class.text-gray-900]="page !== currentPage"
+              [class.z-10]="page === currentPage"
+            >
+              {{ page }}
+            </button>
+            
+            <!-- Next button -->
+            <button
+              (click)="changePage(currentPage + 1)"
+              [disabled]="currentPage === totalPages"
+              class="relative inline-flex items-center px-2 py-2 text-gray-400 border border-gray-300 bg-white text-sm font-medium hover:bg-gray-50 rounded-r-md"
+              [class.opacity-50]="currentPage === totalPages"
+              [class.cursor-not-allowed]="currentPage === totalPages"
+              [class.rounded-r-md]="currentLang() !== 'ar'"
+              [class.rounded-l-md]="currentLang() === 'ar'"
+            >
+              <span class="sr-only">{{ 'ENTITIES.PAGINATION.NEXT' | transloco }}</span>
+              <svg
+              class="w-5 h-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                *ngIf="currentLang() !== 'ar'"
+                fill-rule="evenodd"
+                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                clip-rule="evenodd"
+              />
+              <path
+                *ngIf="currentLang() === 'ar'"
+                fill-rule="evenodd"
+                d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            </button>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <!-- Delete Confirmation Modal -->
+  <div *ngIf="showDeleteModal" class="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-lg p-6 max-w-md w-full mx-4 transform transition-all" 
+         [ngClass]="currentLang() === 'ar' ? 'text-right' : 'text-left'">
+      <div class="mb-4">
+        <div class="flex items-center mb-3">
+          <div class="bg-red-100 p-2 rounded-full mr-3" [ngClass]="{'ml-3 mr-0': currentLang() === 'ar'}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium text-gray-900">
+            {{ entityToDelete?.isCustomer ? ('ENTITIES.DELETE_MODAL.DELETE_CLIENT' | transloco) : ('ENTITIES.DELETE_MODAL.DELETE_BENEFICIARY' | transloco) }}
+          </h3>
+        </div>
+        <p class="text-gray-600">
+          {{ entityToDelete?.isCustomer ? ('ENTITIES.DELETE_MODAL.CLIENT_MESSAGE' | transloco) : ('ENTITIES.DELETE_MODAL.BENEFICIARY_MESSAGE' | transloco) }} 
+          <span class="font-medium">{{ entityToDelete?.name }}</span>?
+        </p>
+        <p *ngIf="entityToDelete?.isCustomer" class="text-sm text-amber-600 mt-2">
+          {{ 'ENTITIES.DELETE_MODAL.CLIENT_WARNING' | transloco }}
+        </p>
+      </div>
+      
+      <div class="flex justify-end space-x-3 gap-2" >
+        <button 
+          (click)="cancelDelete()" 
+          class="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none"
+        >
+          {{ 'ENTITIES.BUTTONS.CANCEL' | transloco }}
+        </button>
+        <button 
+          (click)="entityToDelete && deleteEntity(entityToDelete)" 
+          class="py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none"
+          [disabled]="loading"
+        >
+          <span *ngIf="!loading">{{ 'ENTITIES.BUTTONS.DELETE' | transloco }}</span>
+          <svg *ngIf="loading" class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 

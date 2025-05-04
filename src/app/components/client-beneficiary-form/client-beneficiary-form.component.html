@@ -1,45 +1,52 @@
 <div class="mx-5">
   <div class="mb-6">
-    <h1 class="text-2xl font-bold text-gray-800">{{ 'ENTITIES.TITLE' | transloco }}</h1>
+    <h1 class="text-2xl  text-gray-800">{{ 'ENTITIES.TITLE' | transloco }}</h1>
     <p class="text-gray-600">{{ 'ENTITIES.SUBTITLE' | transloco }}</p>
   </div>
   
   <div class="bg-white rounded-lg shadow-sm p-12">
-    <h2 class="text-xl font-semibold mb-6 text-gray-800">{{ 'ENTITIES.FORM_TITLE' | transloco }}</h2>
+    <!-- Dynamic title based on mode -->
+    <h2 class="text-xl font-semibold mb-6 text-gray-800">
+      {{ isEditMode ? ('ENTITIES.EDIT_TITLE' | transloco) : ('ENTITIES.FORM_TITLE' | transloco) }}
+    </h2>
     
     <form [formGroup]="clientBeneficiaryForm" (ngSubmit)="onSubmit()">
+      <!-- Hidden ID field for edit mode -->
+      <input type="hidden" formControlName="Id">
+      
       <!-- Name Field -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-      <div>
-        <label for="name" class="form-label">{{ 'ENTITIES.FIELDS.NAME' | transloco }}</label>
-        <input 
-          type="text" 
-          id="name" 
-          formControlName="Name" 
-          class="form-input" 
-          [placeholder]= "'ENTITIES.PLACEHOLDERS.NAME' | transloco"
-          [ngClass]="{'border-red-500': submitted && f['Name'].errors}"
-        >
-        <div *ngIf="submitted && f['Name'].errors" class="form-error">
-          <div *ngIf="f['Name'].errors['required']">{{ 'ENTITIES.FIELDS.NAME_REQUIRED' | transloco }}</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+        <div>
+          <label for="name" class="form-label">{{ 'ENTITIES.FIELDS.NAME' | transloco }}</label>
+          <input 
+            type="text" 
+            id="name" 
+            formControlName="Name" 
+            class="form-input" 
+            [placeholder]= "'ENTITIES.PLACEHOLDERS.NAME' | transloco"
+            [ngClass]="{'border-red-500': submitted && f['Name'].errors}"
+          >
+          <div *ngIf="submitted && f['Name'].errors" class="form-error">
+            <div *ngIf="f['Name'].errors['required']">{{ 'ENTITIES.FIELDS.NAME_REQUIRED' | transloco }}</div>
+          </div>
+        </div>
+        
+        <!-- Address Field -->
+        <div>
+          <label for="address" class="form-label">{{ 'ENTITIES.FIELDS.ADDRESS' | transloco }}</label>
+          <input 
+            id="address" 
+            formControlName="Address" 
+            class="form-input" 
+            [placeholder]= "'ENTITIES.PLACEHOLDERS.ADDRESS' | transloco"
+            [ngClass]="{'border-red-500': submitted && f['Address'].errors}"
+          >
+          <div *ngIf="submitted && f['Address'].errors" class="form-error">
+            <div *ngIf="f['Address'].errors['required']">{{ 'ENTITIES.FIELDS.ADDRESS_REQUIRED' | transloco }}</div>
+          </div>
         </div>
       </div>
       
-      <!-- Address Field -->
-      <div>
-        <label for="address" class="form-label">{{ 'ENTITIES.FIELDS.ADDRESS' | transloco }}</label>
-        <input 
-          id="address" 
-          formControlName="Address" 
-          class="form-input" 
-          [placeholder]= "'ENTITIES.PLACEHOLDERS.ADDRESS' | transloco"
-          [ngClass]="{'border-red-500': submitted && f['Address'].errors}"
-        >
-        <div *ngIf="submitted && f['Address'].errors" class="form-error">
-          <div *ngIf="f['Address'].errors['required']">{{ 'ENTITIES.FIELDS.ADDRESS_REQUIRED' | transloco }}</div>
-        </div>
-      </div>
-    </div>
       <!-- Two columns layout for smaller fields -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
         <!-- Sector Field -->
@@ -51,14 +58,14 @@
             formControlName="Sector" 
             class="form-input"
             [placeholder]= "'ENTITIES.PLACEHOLDERS.SECTOR' | transloco"
-            [ngClass]="{'border-red-500': submitted && f['Name'].errors}">
+            [ngClass]="{'border-red-500': submitted && f['Sector'].errors}">
             <div *ngIf="submitted && f['Sector'].errors" class="form-error">
               <div *ngIf="f['Sector'].errors['required']">{{ 'ENTITIES.FIELDS.SECTOR_REQUIRED' | transloco }}</div>
             </div>
         </div>
 
         <!-- Source of Fund Field -->
-        <div>
+        <!-- <div>
           <label for="sourceOfFund" class="form-label">{{ 'ENTITIES.FIELDS.SOURCE_OF_FUND' | transloco }}</label>
           <input 
             type="text" 
@@ -66,15 +73,15 @@
             formControlName="SourceOfFund" 
             class="form-input"
             [placeholder]= "'ENTITIES.PLACEHOLDERS.SOURCE_OF_FUND' | transloco"
-            [ngClass]="{'border-red-500': submitted && f['Name'].errors}">
+            [ngClass]="{'border-red-500': submitted && f['SourceOfFund'].errors}">
             <div *ngIf="submitted && f['SourceOfFund'].errors" class="form-error">
               <div *ngIf="f['SourceOfFund'].errors['required']">{{ 'ENTITIES.FIELDS.SOURCE_OF_FUND_REQUIRED' | transloco }}</div>
             </div>
-        </div>
+        </div> -->
       </div>
 
       <!-- Type of Goods Field -->
-      <div class="mb-5">
+      <!-- <div class="mb-5">
         <label for="typeOfGoods" class="form-label">{{ 'ENTITIES.FIELDS.TYPE_OF_GOODS' | transloco }}</label>
         <input 
           type="text" 
@@ -82,11 +89,11 @@
           formControlName="TypeOfGoods" 
           class="form-input"
           [placeholder]= "'ENTITIES.PLACEHOLDERS.TYPE_OF_GOODS' | transloco"
-          [ngClass]="{'border-red-500': submitted && f['Name'].errors}">
+          [ngClass]="{'border-red-500': submitted && f['TypeOfGoods'].errors}">
           <div *ngIf="submitted && f['TypeOfGoods'].errors" class="form-error">
             <div *ngIf="f['TypeOfGoods'].errors['required']">{{ 'ENTITIES.FIELDS.TYPE_OF_GOODS_REQUIRED' | transloco }}</div>
           </div>
-      </div>
+      </div> -->
 
       <!-- Banking Information Section -->
       <div class="mt-8 mb-5">
@@ -102,7 +109,7 @@
               formControlName="AccountNo" 
               class="form-input"
               [placeholder]= "'ENTITIES.PLACEHOLDERS.ACCOUNT_NUMBER' | transloco"
-              [ngClass]="{'border-red-500': submitted && f['Name'].errors}">
+              [ngClass]="{'border-red-500': submitted && f['AccountNo'].errors}">
               <div *ngIf="submitted && f['AccountNo'].errors" class="form-error">
                 <div *ngIf="f['AccountNo'].errors['required']">{{ 'ENTITIES.FIELDS.ACCOUNT_NUMBER_REQUIRED' | transloco }}</div>
               </div>
@@ -117,7 +124,7 @@
               formControlName="BankName" 
               class="form-input"
               [placeholder]= "'ENTITIES.PLACEHOLDERS.BANK_NAME' | transloco"
-              [ngClass]="{'border-red-500': submitted && f['Name'].errors}">
+              [ngClass]="{'border-red-500': submitted && f['BankName'].errors}">
               <div *ngIf="submitted && f['BankName'].errors" class="form-error">
                 <div *ngIf="f['BankName'].errors['required']">{{ 'ENTITIES.FIELDS.BANK_NAME_REQUIRED' | transloco }}</div>
               </div>
@@ -132,7 +139,7 @@
               formControlName="BankBranch" 
               class="form-input"
               [placeholder]= "'ENTITIES.PLACEHOLDERS.BANK_BRANCH' | transloco"
-              [ngClass]="{'border-red-500': submitted && f['Name'].errors}">
+              [ngClass]="{'border-red-500': submitted && f['BankBranch'].errors}">
               <div *ngIf="submitted && f['BankBranch'].errors" class="form-error">
                 <div *ngIf="f['BankBranch'].errors['required']">{{ 'ENTITIES.FIELDS.BANK_BRANCH_REQUIRED' | transloco }}</div>
               </div>
@@ -147,8 +154,8 @@
               formControlName="BankSwiftCode" 
               class="form-input"
               [placeholder]= "'ENTITIES.PLACEHOLDERS.BANK_SWIFT' | transloco"
-              [ngClass]="{'border-red-500': submitted && f['Name'].errors}"
-              >
+              [ngClass]="{'border-red-500': submitted && f['BankSwiftCode'].errors}"
+            >
             <div *ngIf="submitted && f['BankSwiftCode'].errors" class="form-error">
               <div *ngIf="f['BankSwiftCode'].errors['required']">{{ 'ENTITIES.FIELDS.BANK_SWIFT_REQUIRED' | transloco }}</div>
             </div>
@@ -182,30 +189,45 @@
         </div>
       </div>
 
-      <!-- Form Submission -->
-      <div>
+      <!-- Form Actions -->
+      <div class="flex gap-2">
+        <!-- Submit Button - Text changes based on mode -->
         <button 
           type="submit" 
           class="btn-primary bg-indigo-600 hover:bg-indigo-700" 
           [disabled]="loading"
         >
-          <span *ngIf="loading" class="mr-2">
+          <span *ngIf="loading" class="me-2">
             <svg class="animate-spin h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
           </span>
-          {{ loading ? ('ENTITIES.BUTTONS.CREATING'| transloco) : ('ENTITIES.BUTTONS.CREATE' | transloco)}}
+          <span *ngIf="!isEditMode">
+            {{ loading ? ('ENTITIES.BUTTONS.CREATING'| transloco) : ('ENTITIES.BUTTONS.CREATE' | transloco)}}
+          </span>
+          <span *ngIf="isEditMode">
+            {{ loading ? ('ENTITIES.BUTTONS.SAVING'| transloco) : ('ENTITIES.BUTTONS.SAVE' | transloco)}}
+          </span>
+        </button>
+        
+        <button 
+          *ngIf="isEditMode"
+          type="button" 
+          class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
+          [routerLink]="['/entity-management']"
+        >
+          {{ 'ENTITIES.BUTTONS.CANCEL' | transloco }}
         </button>
       </div>
 
       <!-- Success and Error Messages -->
       <div *ngIf="successMessage" class="success-message mt-4">
-        {{ 'MESSAGES.SUCCESS.ENTITY_CREATED' | transloco  }}
+        {{ successMessage | transloco }}
       </div>
       
       <div *ngIf="errorMessage" class="error-message mt-4">
-        {{ 'MESSAGES.ERROR.DEFAULT' | transloco  }}
+        {{ errorMessage | transloco }}
       </div>
     </form>
   </div>

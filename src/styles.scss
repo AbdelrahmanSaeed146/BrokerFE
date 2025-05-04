@@ -3,6 +3,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Alexandria Font */
+@font-face {
+    font-family: 'Alexandria';
+    src: url('/assets/Alexandria/Alexandria-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Set Alexandria as the default font */
+@layer base {
+    html {
+        font-family: 'Alexandria', system-ui, sans-serif;
+    }
+}
+
 /* Custom Form Styling */
 @layer components {
     .form-input {
@@ -24,6 +40,20 @@
     .card {
         @apply bg-white rounded-lg shadow-sm p-6;
     }
+
+    .form-input::placeholder {
+        @apply text-xs text-gray-400;
+    }
+
+
+
+    .form-select {
+        @apply block w-full border border-gray-300 rounded-md py-2 px-3 shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-gray-400 text-gray-700 text-xs;
+    }
+
+    // .form-select>option {
+    //     @apply text-xs text-gray-400;
+    // }
 
     .success-message {
         @apply text-green-600 font-medium mt-2 ml-1 mr-1 flex items-center;

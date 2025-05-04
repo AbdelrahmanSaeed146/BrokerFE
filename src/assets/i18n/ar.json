@@ -13,6 +13,7 @@
     },
     "NAV": {
         "MANAGE_ENTITIES": "إدارة العملاء",
+        "ENTITY_MANAGEMENT": "إدارة العملاء والمستفيدين",
         "GENERATE_PDF": "إنشاء PDF",
         "ADMIN": "المدير"
     },
@@ -20,6 +21,27 @@
         "TITLE": "إدارة العملاء",
         "SUBTITLE": "إنشاء وإدارة العملاء والمستفيدين",
         "FORM_TITLE": "إنشاء عميل/مستفيد",
+        "MANAGEMENT_TITLE": "إدارة العملاء والمستفيدين",
+        "MANAGEMENT_SUBTITLE": "عرض وتعديل جميع العملاء والمستفيدين",
+        "EDIT_TITLE": "تعديل عميل/مستفيد",
+        "CLIENTS_LIST": "قائمة العملاء",
+        "BENEFICIARIES_LIST": "قائمة المستفيدين",
+        "NO_CLIENTS": "لم يتم العثور على عملاء",
+        "NO_BENEFICIARIES": "لم يتم العثور على مستفيدين",
+        "CONFIRM_DELETE": "هل أنت متاكد من حذف هذا العميل/المستفيد؟",
+        "DELETE_MODAL": {
+            "TITLE": "حذف عميل/مستفيد",
+            "MESSAGE": "هذا الإجراء سيحذف العميل/المستفيد بشكل دائم وجميع المعاملات المرتبطة به.",
+            "DELETE_CLIENT": "حذف العميل",
+            "DELETE_BENEFICIARY": "حذف المستفيد",
+            "CLIENT_MESSAGE": "هل أنت متأكد أنك تريد حذف العميل",
+            "BENEFICIARY_MESSAGE": "هل أنت متأكد أنك تريد حذف المستفيد",
+            "CLIENT_WARNING": "حذف العميل سيؤدي إلى إزالة جميع المعاملات والوثائق المرتبطة به."
+        },
+        "TABS": {
+            "CLIENTS": "العملاء",
+            "BENEFICIARIES": "المستفيدون"
+        },
         "FIELDS": {
             "NAME": "الاسم",
             "NAME_REQUIRED": "الاسم مطلوب",
@@ -42,7 +64,8 @@
             "BANK_SWIFT_REQUIRED": "رمز سويفت البنكي مطلوب",
             "ENTITY_TYPE": "نوع الكيان",
             "IS_CLIENT": "هذا عميل",
-            "IS_BENEFICIARY": "هذا مستفيد"
+            "IS_BENEFICIARY": "هذا مستفيد",
+            "ACTIONS": "الإجراءات"
         },
         "PLACEHOLDERS": {
             "NAME": "أدخل الاسم",
@@ -55,9 +78,23 @@
             "BANK_BRANCH": "أدخل فرع البنك",
             "BANK_SWIFT": "أدخل رمز سويفت"
         },
+        "PAGINATION": {
+            "SHOWING": "عرض",
+            "TO": "إلى",
+            "OF": "من",
+            "RESULTS": "نتيجة",
+            "PREVIOUS": "السابق",
+            "NEXT": "التالي"
+        },
         "BUTTONS": {
             "CREATE": "إنشاء",
-            "CREATING": "جاري الإنشاء..."
+            "CREATING": "جاري الإنشاء...",
+            "EDIT": "تعديل",
+            "DELETE": "حذف",
+            "SAVE": "حفظ التغييرات",
+            "SAVING": "جاري الحفظ...",
+            "CANCEL": "إلغاء",
+            "CREATE_NEW": "إنشاء جديد"
         }
     },
     "PDF": {
@@ -111,7 +148,9 @@
     "MESSAGES": {
         "SUCCESS": {
             "ENTITY_CREATED": "تم إنشاء العميل/المستفيد بنجاح!",
-            "PDF_GENERATED": "تم إنشاء المعاملة بنجاح! تم إنشاء ملف PDF."
+            "ENTITY_UPDATED": "تم تحديث العميل/المستفيد بنجاح!",
+            "PDF_GENERATED": "تم إنشاء المعاملة بنجاح! تم إنشاء ملف PDF.",
+            "ENTITY_DELETED": "تم حذف العميل/المستفيد بنجاح!"
         },
         "ERROR": {
             "DEFAULT": "حدث خطأ. يرجى المحاولة مرة أخرى."
